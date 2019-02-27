@@ -1,10 +1,11 @@
 
-import { getFromStorage, saveToStorage, makeId } from '../../../services/util-service.js'
+import { getFromStorage, saveToStorage, makeId, getCurrentTime } from '../../../services/util-service.js'
 
 export default {
     getEmails,
     getEmailById,
-    setEmailIsRead
+    setEmailIsRead,
+    getFormattedDate
 }
 
 var gEmails = createEmails();
@@ -13,9 +14,26 @@ function createEmails() {
     if (getFromStorage('emails')) return getFromStorage('emails');
     else {
         var emails = [
-            { id: makeId(), sentBy: 'Shuki', subject: 'Wassap with Vue?', body: 'May I', isRead: false, sentAt: 1751133930594 },
-            { id: makeId(), sentBy: 'Puki', subject: 'Wassap with React?', body: 'Must not', isRead: false, sentAt: 2251133930596 },
-            { id: makeId(), sentBy: 'Muki', subject: 'Wassap with Angular?', body: 'I should', isRead: true, sentAt: 1951133930598 },
+            {
+                id: makeId(), sentBy: 'Shuki', subject: 'Wassap with Vue?', body: 'I should', isRead: false,
+                sentAt: 1548161906123
+            },
+            {
+                id: makeId(), sentBy: 'Puki', subject: 'Wassap with React?', body: 'May I', isRead: false,
+                sentAt: Date.now() - 6 * 60 * 60 * 1000
+            },
+            {
+                id: makeId(), sentBy: 'Suzuki', subject: 'Wassap with jQuery?', body: 'Really?', isRead: false,
+                sentAt: Date.now() - 14 * 60 * 60 * 1000
+            },
+            {
+                id: makeId(), sentBy: 'Kuki', subject: 'Wassap with VanillaJS?', body: 'Maybe', isRead: true,
+                sentAt: 1550140306432
+            },
+            {
+                id: makeId(), sentBy: 'Muki', subject: 'Wassap with Angular?', body: 'Must not', isRead: true,
+                sentAt: 1321819862000
+            },
         ];
         saveToStorage('emails', emails)
         return emails;
@@ -23,7 +41,8 @@ function createEmails() {
 }
 
 function getEmails() {
-    return Promise.resolve(gEmails);
+    var emails = gEmails.sort((a, b) => { return a.sentAt < b.sentAt })
+    return Promise.resolve(emails);
 }
 
 function getEmailById(emailId) {
@@ -38,5 +57,11 @@ function setEmailIsRead(emailId) {
         return emailId === email.id
     })
     gEmails[idx].isRead = true;
+    saveToStorage('emails', gEmails)
     return Promise.resolve()
+}
+
+function getFormattedDate(timestamp) {
+    var formattedDate = getCurrentTime(timestamp);
+    return Promise.resolve(formattedDate)
 }

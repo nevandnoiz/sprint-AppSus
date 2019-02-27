@@ -31,23 +31,24 @@ export function makeId() {
     return txt;
 }
 
- export function getCurrentTime() {
+export function getCurrentTime() {
     const date = new Date();
-    let hour = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
-    let min = date.getMinutes();
-    let sec = date.getSeconds();
-    let ampm = date.getHours() >= 12 ? 'PM' : 'AM';
-    hour = (hour < 10 ? "0" : "") + hour;
-    min = (min < 10 ? "0" : "") + min;
-    sec = (sec < 10 ? "0" : "") + sec;
 
     const time = {
         year: date.getFullYear(),
         month: date.getMonth(),
-        day: date.getDate(),
-        hour: hour,
-        min: min,
-        sec: sec,
+        dateDay: date.getDate(),
+        hour: date.getHours(),
+        min: date.getMinutes(),
+        sec: date.getSeconds(),
+    }
+    const weekDay = date.getDay()
+    const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    // time.min = (min < 10 ? "0" : "") + min;
+    for (var i = 0; i <= 6; i++) {
+        if (weekDay === i) {
+            time.weekDay = daysOfTheWeek[i]
+        }
     }
     return time;
 }
