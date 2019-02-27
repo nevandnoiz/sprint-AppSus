@@ -1,22 +1,31 @@
 import emailService from '../services/email-service.js';
 import emailFilter from '../cmps/email-filter-cmp.js';
 import emailList from '../cmps/email-list-cmp.js';
+import emailStatus from '../cmps/email-status-cmp.js';
+import emailCompose from '../cmps/email-compose-cmp.js';
 
 export default {
     components: {
         emailFilter,
-        emailList
+        emailList,
+        emailStatus,
+        emailCompose
     },
     template: `   
     <div class="email-app" v-if="emails">
         <email-filter @filtered="setFilter"></email-filter>
         <email-list @read="setIsRead" :emails="emailsToShow"></email-list>
+        <button @click="isComposing=!isComposing">Compose</button>
+        <email-status :emails="emailsToShow"></email-status>
+        <email-compose @sent="addEmail" v-if="isComposing"></email-compose>
+        <router-view></router-view>
     </div>
 `,
     data() {
         return {
             emails: null,
             filterBy: null,
+            isComposing:false
         }
     },
     methods: {
@@ -25,6 +34,10 @@ export default {
         },
         setIsRead(emailId) {
             setTimeout(emailService.setEmailIsRead, 2000, emailId);
+        },
+        addEmail(email) {
+            this.isComposing=false
+            setTimeout(emailService.addEmail, 2000, email);
         }
     },
     computed: {
