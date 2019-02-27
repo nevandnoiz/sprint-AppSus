@@ -29,3 +29,15 @@ export function makeId() {
 
     return txt;
 }
+
+function getCurrentTime() {
+    this.date = new Date();
+    var hour = this.date.getHours() > 12 ? this.date.getHours() - 12 : this.date.getHours();
+    var min = this.date.getMinutes();
+    var sec = this.date.getSeconds();
+    var ampm = this.date.getHours() >= 12 ? 'PM' : 'AM';
+    hour = (hour < 10 ? "0" : "") + hour;
+    min = (min < 10 ? "0" : "") + min;
+    sec = (sec < 10 ? "0" : "") + sec;
+    this.time = `${hour}:${min}:${sec} ${ampm}`;
+}
