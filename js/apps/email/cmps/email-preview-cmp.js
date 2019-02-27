@@ -5,7 +5,7 @@ export default {
        <span class="preview-sent-by">{{email.sentBy}}</span>
         <span class="preview-subject">{{email.subject}} -</span>
         <span class="preview-body">{{email.body}}</span>
-        <span class="preview-body">{{sentAtFormatted}}</span>
+        <span class="preview-sent-at">{{sentAtFormatted}}</span>
     </div>
     `,
     data() {
@@ -21,7 +21,6 @@ export default {
     computed: {
         sentAtFormatted() {
             var sentAt = ''+this.email.sentAt;
-            // console.log(sentAt)
             var hours = sentAt.substring(0, 2);
             var mins = sentAt.substring(2, 4)
             return `${hours}:${mins}`

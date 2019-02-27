@@ -3,6 +3,11 @@
 @import "email.css";
 @import "notes.css";
 
-*{
+* {
     box-sizing: border-box;
+}
+
+a {
+color: inherit;
+text-decoration: none;
 }
