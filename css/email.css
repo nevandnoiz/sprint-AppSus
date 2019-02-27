@@ -19,9 +19,15 @@
 
 .email-preview{
     padding:14px;
+    font-weight:bold;
     border: 1px solid black;
     display:grid;
     grid-template-columns: repeat(4, minmax(200px,1fr));
+}
+
+.read{
+   font-weight: normal;
+   background-color: rgb(224, 224, 224)	;
 }
 
 .email-preview .preview-sent-by{

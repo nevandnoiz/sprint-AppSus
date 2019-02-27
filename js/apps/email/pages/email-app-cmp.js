@@ -10,7 +10,7 @@ export default {
     template: `   
     <div class="email-app" v-if="emails">
         <email-filter @filtered="setFilter"></email-filter>
-        <email-list :emails="emailsToShow""></email-list>
+        <email-list @read="setIsRead" :emails="emailsToShow"></email-list>
     </div>
 `,
     data() {
@@ -22,6 +22,9 @@ export default {
     methods: {
         setFilter(filter) {
             this.filterBy = filter;
+        },
+        setIsRead(emailId) {
+            setTimeout(emailService.setEmailIsRead, 2000, emailId);
         }
     },
     computed: {

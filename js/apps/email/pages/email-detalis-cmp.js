@@ -7,7 +7,7 @@ export default {
        <span class="details-sent-by">{{email.sentBy}}</span>
         <span class="details-subject">{{email.subject}} -</span>
         <span class="details-body">{{email.body}}</span>
-        <span class="details-sent-at">{{email.sentAt}}</span>
+        <span class="details-sent-at">{{}}</span>
     </div>
     `,
     data() {
@@ -23,6 +23,11 @@ export default {
             .then(email => this.email = email)
     },
     computed: {
-
+        // fullDate() {
+        //     var formattedDate;
+        //     emailService.getFormattedDate(this.email.setAt)
+        //         .then(date => formattedDate = date)
+        //         return formattedDate.day
+        // }
     }
 }
