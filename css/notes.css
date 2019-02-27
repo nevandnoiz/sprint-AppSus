@@ -1,8 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto:400,700');
+
+
+.notes-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .new-note{
     display: flex;
     flex-flow: column;
-    border: solid 1px gray;
-    width: 400px;
+    height: 50px;
+    width: 500px;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    border: 0;
+    border-radius: 7px;
+    margin:50px;
+}    
+
+.new-note input{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 8px;
+}
+
+.new-note textarea{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    padding: 8px;
+}
+
+
+.createMode {
+    height: 150px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+
 }
 
 .new-note > * {
@@ -10,6 +45,33 @@
     margin: 5px
 }
 
-.new-note input{
-    height: 30px;
+.note-card {
+    width: 240px;
+    min-height: 50px;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    margin: 10px;
+    transition: .2s ease
+}
+
+.note-card > h2{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.note-card > p{
+    font-family: 'Roboto', sans-serif;
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+
+.note-card:hover {
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    
 }

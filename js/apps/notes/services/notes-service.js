@@ -20,7 +20,7 @@ export function saveNote(note) {
         date: note.date,
         type: note.type,
         text: {
-            headline: note.headline,
+            headline: note.text.headline,
             body: note.text.body
         },
         tags: note.tags,
@@ -28,6 +28,4 @@ export function saveNote(note) {
         reminder: note.reminder
     })
     saveToStorage(storageKey, gNotes);
-    console.log(gNotes);
-    
 }
