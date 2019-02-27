@@ -5,7 +5,7 @@ export default {
     getEmails,
     getEmailById,
     setEmailIsRead,
-    getFormattedDate
+    addEmail
 }
 
 var gEmails = createEmails();
@@ -41,8 +41,8 @@ function createEmails() {
 }
 
 function getEmails() {
-    var emails = gEmails.sort((a, b) => { return a.sentAt < b.sentAt })
-    return Promise.resolve(emails);
+    sortEmails()
+    return Promise.resolve(gEmails);
 }
 
 function getEmailById(emailId) {
@@ -61,7 +61,16 @@ function setEmailIsRead(emailId) {
     return Promise.resolve()
 }
 
-function getFormattedDate(timestamp) {
-    var formattedDate = getCurrentTime(timestamp);
-    return Promise.resolve(formattedDate)
+function addEmail(email) {
+    var newEmail = email;
+    newEmail.sentAt = Date.now();
+    newEmail.id = makeId()
+    gEmails.push(newEmail);
+    saveToStorage('emails', gEmails)
+    sortEmails()
+    return Promise.resolve()
+}
+
+function sortEmails() {
+    gEmails.sort((a, b) => { return a.sentAt < b.sentAt })
 }
