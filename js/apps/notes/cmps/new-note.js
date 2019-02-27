@@ -3,9 +3,17 @@ import { saveNote } from '../services/notes-service.js'
 export default {
     template: `   
     <div  :class="[{ createMode: edit }, 'new-note']">
-        <input v-if="edit" type="text" v-model="newNote.text.headline" ref="headline"  @blur="noteBlur" placeholder="headline">
-        <textarea cols="30" rows="5" v-model="newNote.text.body" @focus="noteFocused" @blur="noteBlur" ref="body" placeholder="enter text here"></textarea>
-        <button v-if="edit" @click="addNote">save note</button>
+        <div class="text-note">
+            <input v-if="edit" type="text" v-model="newNote.text.headline" ref="headline"  @blur="noteBlur" placeholder="Title">
+            <textarea cols="30" rows="5" v-model="newNote.text.body" @focus="noteFocused" @blur="noteBlur" ref="body" :placeholder="textareaPlaceholder"></textarea>
+            <button v-if="edit" @click="addNote">save note</button>
+        </div>
+        <div class="upload-btns" v-if="!edit">
+        <i :class="videoClass" @click="uploadVideo"></i>
+        </div>
+       
+</iframe>
+
     </div>
 `
     ,
@@ -24,6 +32,14 @@ export default {
                 reminder: null
             },
             edit: false,
+            video: false,
+            videoClass: 'fab fa-youtube'
+        }
+    },
+    computed: {
+        textareaPlaceholder() {
+            if (this.video) return 'Enter youtube link here!'
+            else return 'Take a note..'
         }
     },
     methods: {
@@ -43,13 +59,19 @@ export default {
                 reminder: null
             }
         },
+        addVideo() {
+
+            `<iframe width="420" height="345" src="https://www.youtube.com/embed/${videoID}">`
+        },
         noteFocused() {
             if (!this.newNote.date) this.newNote.date = Date.now();
+            if (this.video) return;
             this.edit = true;
             const body = this.$refs.body;
             setTimeout(() => body.focus(), 0);
         },
         noteBlur() {
+            if (this.video) return
             const body = this.$refs.body;
             const headline = this.$refs.headline
             setTimeout(() => {
@@ -57,6 +79,24 @@ export default {
                 this.edit = false;
                 this.addNote()
             }, 0)
+        },
+        uploadVideo() {
+            if (!this.video) {
+                this.video = true;
+                this.videoClass = 'fas fa-cloud-upload-alt'
+            } else {
+                if (!this.newNote.text.body) {
+                    this.videoClass = 'fab fa-youtube';
+                    this.video = false;
+                } else {
+                    this.newNote.type = 'video'
+                    this.newNote.url = this.newNote.text.body
+                    this.newNote.text.body = 'video'
+                    this.addNote(this.newNote)
+                    this.video = false;
+                    this.videoClass = 'fab fa-youtube';
+                }
+            }
         }
     },
 }
