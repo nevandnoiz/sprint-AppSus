@@ -7,8 +7,8 @@ export default {
     props: ['emails'],
     template: `
     <div class="email-list">
-        <router-link v-for="email in emails" :to="'/email/'+ email.id">
-        <email-preview :email="email"></email-preview>
+        <router-link  v-for="email in emails" :to="'/email/'+ email.id">
+        <email-preview @click.native="$emit('read',email.id)" :email="email"></email-preview>
         </router-link>        
     </div>
     `,

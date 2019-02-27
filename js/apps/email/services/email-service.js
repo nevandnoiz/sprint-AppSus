@@ -3,7 +3,8 @@ import { getFromStorage, saveToStorage, makeId } from '../../../services/util-se
 
 export default {
     getEmails,
-    getEmailById
+    getEmailById,
+    setEmailIsRead
 }
 
 var gEmails = createEmails();
@@ -30,4 +31,12 @@ function getEmailById(emailId) {
         return emailId === email.id
     })
     return Promise.resolve(email)
+}
+
+function setEmailIsRead(emailId) {
+    var idx = gEmails.findIndex(function (email) {
+        return emailId === email.id
+    })
+    gEmails[idx].isRead = true;
+    return Promise.resolve()
 }
