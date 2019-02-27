@@ -2,8 +2,10 @@
 export default {
     props: ['emails'],
     template: `
-    <div class="email-status">
-    <span :style="unreadPercentageStyle">{{unreadPercentage}}%</span>
+    <div class="email-sidebar">
+        <span>inbox</span>
+        <span>sent</span>
+        <span>deleted</span>
     </div>
     `,
     data() {

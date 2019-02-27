@@ -1,31 +1,36 @@
 import emailService from '../services/email-service.js';
 import emailFilter from '../cmps/email-filter-cmp.js';
-import emailList from '../cmps/email-list-cmp.js';
+// import emailList from '../cmps/email-list-cmp.js';
 import emailStatus from '../cmps/email-status-cmp.js';
 import emailCompose from '../cmps/email-compose-cmp.js';
+import emailSidebar from '../cmps/email-sidebar-cmp.js';
 
 export default {
     components: {
         emailFilter,
-        emailList,
+        // emailList,
         emailStatus,
+        emailSidebar,
         emailCompose
     },
     template: `   
     <div class="email-app" v-if="emails">
         <email-filter @filtered="setFilter"></email-filter>
-        <email-list @read="setIsRead" :emails="emailsToShow"></email-list>
-        <button @click="isComposing=!isComposing">Compose</button>
-        <email-status :emails="emailsToShow"></email-status>
+        <!-- <email-list ></email-list> -->
+        <div class="app-side-bar">
+            <button @click="isComposing=!isComposing">Compose</button>
+            <email-sidebar></email-sidebar>
+            <email-status :emails="emailsToShow"></email-status>
+        </div>
         <email-compose @sent="addEmail" v-if="isComposing"></email-compose>
-        <router-view></router-view>
+        <router-view class="email-in-app" @read="setIsRead" :emails="emailsToShow"></router-view>
     </div>
 `,
     data() {
         return {
             emails: null,
             filterBy: null,
-            isComposing:false
+            isComposing: false
         }
     },
     methods: {
@@ -36,7 +41,7 @@ export default {
             setTimeout(emailService.setEmailIsRead, 2000, emailId);
         },
         addEmail(email) {
-            this.isComposing=false
+            this.isComposing = false
             setTimeout(emailService.addEmail, 2000, email);
         }
     },
@@ -46,7 +51,8 @@ export default {
             if (this.filterBy.byName !== '') {
                 filteredEmails = filteredEmails.filter(email => {
                     return email.subject.toLowerCase().includes(this.filterBy.byName.toLowerCase()) ||
-                        email.body.toLowerCase().includes(this.filterBy.byName.toLowerCase())
+                        email.body.toLowerCase().includes(this.filterBy.byName.toLowerCase()) ||
+                        email.sentBy.toLowerCase().includes(this.filterBy.byName.toLowerCase())
                 })
             }
             if (this.filterBy.selectedFilter === 'Read') {

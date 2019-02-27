@@ -57,7 +57,6 @@ export default {
                 this.edit = false;
                 this.addNote()
             }, 0)
-
         }
     },
 }
