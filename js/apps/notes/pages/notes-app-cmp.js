@@ -1,12 +1,19 @@
+import newNote from '../cmps/new-note.js/index.js';
+
+
 export default {
     template: `   
-    <div>
-       THIS IS NOTES
-    </div>
+    <section>
+        <div>
+           THIS IS NOTES
+        </div>
+        <new-note></new-note>
+    </section>
+
 `,
     data() {
         return {
-
+            
         }
     },
     methods: {
@@ -14,6 +21,9 @@ export default {
     },
     computed: {
 
+    },
+    components: {
+        newNote
     },
     created() {
 
