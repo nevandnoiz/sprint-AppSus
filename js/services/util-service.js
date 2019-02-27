@@ -1,7 +1,8 @@
 export default {
     getFromStorage,
     saveToStorage,
-    genRandomInt
+    genRandomInt,
+    makeId
 }
 
 export function getFromStorage(key) {
@@ -15,4 +16,16 @@ export function saveToStorage(key, val) {
 
 export function genRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+export function makeId() {
+    var length = 6;
+    var txt = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return txt;
 }

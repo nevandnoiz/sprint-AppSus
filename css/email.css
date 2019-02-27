@@ -1,0 +1,17 @@
+.email-preivew{
+    border: 1px solid black;
+    display:grid;
+    grid-template:repeat(4,1fr);
+}
+
+.email-preview .preview-sent-by{
+    grid-area: 1/1/1/1;
+}
+
+.email-preview .preview-subject{
+    grid-area: 1/1/1/1;
+}
+
+.email-preview .preview-body{
+    grid-area: 1/1/1/1;
+}
