@@ -33,12 +33,21 @@ export function makeId() {
 
  export function getCurrentTime() {
     const date = new Date();
-    var hour = date.getHours() > 12 ? this.date.getHours() - 12 : this.date.getHours();
-    var min = date.getMinutes();
-    var sec = date.getSeconds();
-    var ampm = date.getHours() >= 12 ? 'PM' : 'AM';
+    let hour = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+    let min = date.getMinutes();
+    let sec = date.getSeconds();
+    let ampm = date.getHours() >= 12 ? 'PM' : 'AM';
     hour = (hour < 10 ? "0" : "") + hour;
     min = (min < 10 ? "0" : "") + min;
     sec = (sec < 10 ? "0" : "") + sec;
-    return `${hour}:${min}:${sec} ${ampm}`;
+
+    const time = {
+        year: date.getFullYear(),
+        month: date.getMonth(),
+        day: date.getDate(),
+        hour: hour,
+        min: min,
+        sec: sec,
+    }
+    return time;
 }

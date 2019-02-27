@@ -1,0 +1,15 @@
+.new-note{
+    display: flex;
+    flex-flow: column;
+    border: solid 1px gray;
+    width: 400px;
+}
+
+.new-note > * {
+    border:0;
+    margin: 5px
+}
+
+.new-note input{
+    height: 30px;
+}
