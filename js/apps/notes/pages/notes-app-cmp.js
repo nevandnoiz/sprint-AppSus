@@ -1,4 +1,4 @@
-import newNote from '../cmps/new-note.js/index.js';
+import newNote from '../cmps/new-note.js';
 
 
 export default {

@@ -1,10 +1,11 @@
 import {saveNote} from '../services/notes-service.js'
+import {getCurrentTime , makeId } from '../../../services/util-service.js'
 
 export default {
     template: `   
     <div class="new-note">
 
-        <textarea  cols="30" rows="2" v-model="newNote.text.body" ></textarea>
+        <textarea  cols="30" rows="2" v-model="newNote.text.body" @focus="noteFocused"></textarea>
         <button @click="addNote">save note</button>
         
     </div>
@@ -17,7 +18,7 @@ export default {
                 date: '',
                 type: 'text',
                 text: {
-                    headline: null,
+                    headline: '',
                     body: ''
                 },
                 tags: null,
@@ -29,6 +30,9 @@ export default {
     methods: {
         addNote(){
             saveNote(this.newNote)
+        },
+        noteFocused(){
+            this.newNote.date = getCurrentTime()
         }
     },
     computed: {
