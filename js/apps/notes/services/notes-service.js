@@ -25,7 +25,8 @@ export function saveNote(note) {
         },
         tags: note.tags,
         color: note.color,
-        reminder: note.reminder
+        reminder: note.reminder,
+        url: note.url
     })
     saveToStorage(storageKey, gNotes);
 }
