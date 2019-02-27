@@ -2,3 +2,7 @@
 @import "home.css";
 @import "email.css";
 @import "notes.css";
+
+*{
+    box-sizing: border-box;
+}
