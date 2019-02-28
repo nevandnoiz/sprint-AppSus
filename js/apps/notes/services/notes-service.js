@@ -4,6 +4,7 @@ import { getFromStorage, saveToStorage, makeId } from '../../../services/util-se
 const storageKey = 'notes';
 const gNotes = getNotesFromStorage(storageKey);
 window.notes=gNotes
+
 function getNotesFromStorage(key) {
     const notes = getFromStorage(key);
     return notes ? notes : [];

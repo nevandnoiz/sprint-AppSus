@@ -84,7 +84,7 @@ export default {
                     if (body === document.activeElement || headline === document.activeElement) return;
                     this.edit = false;
                     this.addNote()
-                    this.newNote.color = '#FFF'
+                    this.newNote.color = '#ffffff'
                 }, 0)
             }, 100)
         },
