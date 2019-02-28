@@ -1,13 +1,13 @@
 import emailService from '../services/email-service.js';
 
 export default {
-    props: [''],
+    props: ['currList'],
     template: `
    <div v-if="email" class="email-details">
        <span class="details-sent-by">{{email.sentBy}}</span>
         <span class="details-subject">{{email.subject}} -</span>
         <span class="details-body">{{email.body}}</span>
-        <span class="details-sent-at">{{}}</span>
+        <span class="details-sent-at">jgh</span>
     </div>
     `,
     data() {
@@ -19,7 +19,7 @@ export default {
     },
     created() {
         const emailId = this.$route.params.emailId;
-        emailService.getEmailById(emailId)
+        emailService.getEmailById(emailId,this.currList)
             .then(email => this.email = email)
     },
     computed: {

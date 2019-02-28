@@ -21,7 +21,7 @@ export default {
                 sentBy: '',
                 subject: '',
                 body: '',
-                isRead: false,
+                isRead: true,
                 sentAt: null,
                 id: null
             }

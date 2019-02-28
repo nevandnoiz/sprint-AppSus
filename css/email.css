@@ -37,10 +37,16 @@
 
 .email-preview .preview-subject{
     grid-area: 1/2/1/2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .email-preview .preview-body{
     grid-area: 1/3/1/3;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .email-preview .preview-sent-at{
@@ -88,22 +94,24 @@
    background: repeating-linear-gradient(-45deg, rgb(90, 90, 90), rgb(102, 102, 102) 2%, 
    rgb(19, 201, 58) 3%, rgb(64, 172, 42) 18%);
    background-size: cover;
+   transition: width 0.8s;
 }
 
 .app-side-bar{
     border:1px solid black;
     display: flex;
     flex-direction:column;
-    grid-area: 2/1/2/1
+    grid-area: 2/1/2/1;
+    align-items: center;
 }
-.email-sidebar{
+.email-list-section{
     display: flex;
-    flex-direction:column
+    flex-direction:column;
 }
 
 .email-app{
     display:grid;
-    grid-template:repeat(5,1fr)/repeat(5,1fr)
+    grid-template:50px repeat(4,1fr)/200px repeat(4,1fr);
 }
 
 .email-in-app {

@@ -1,11 +1,17 @@
 
 export default {
-    props: ['emails'],
+    props: ['unreadEmails', 'totalEmails'],
     template: `
-    <div class="email-sidebar">
-        <span>inbox</span>
-        <span>sent</span>
-        <span>deleted</span>
+    <div class="email-list-section">
+    <router-link @click.native="$emit('changeList','inbox')" :to="'/email/inbox'">
+         Inbox <span v-if="unreadStatus">({{unreadEmails}})</span>
+        </router-link>
+        <router-link @click.native="$emit('changeList','sent')" :to="'/email/sent'"">
+          Sent
+        </router-link>
+        <router-link :to="'/email/inbox'">
+        Deleted
+        </router-link>
     </div>
     `,
     data() {
@@ -14,27 +20,11 @@ export default {
         }
     },
     methods: {
-        countUnreadMessages() {
-            var count = 0;
-            this.emails.forEach(email => {
-                if (!email.isRead) count++
-            })
-            return count;
-        }
     },
     computed: {
-        numOfEmails() {
-            return this.emails.length
-        },
-        numOfUnreadEmails() {
-            return this.countUnreadMessages()
-        },
-        unreadPercentage() {
-            // return 100;
-            return Math.floor((this.numOfUnreadEmails / this.numOfEmails) * 100)
-        },
-        unreadPercentageStyle() {
-            return `width:${this.unreadPercentage}%`
+        unreadStatus() {
+            if (this.unreadEmails > 0) return true
+            else return false
         }
     },
     created() {

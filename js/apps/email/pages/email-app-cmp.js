@@ -1,6 +1,5 @@
 import emailService from '../services/email-service.js';
 import emailFilter from '../cmps/email-filter-cmp.js';
-// import emailList from '../cmps/email-list-cmp.js';
 import emailStatus from '../cmps/email-status-cmp.js';
 import emailCompose from '../cmps/email-compose-cmp.js';
 import emailSidebar from '../cmps/email-sidebar-cmp.js';
@@ -8,46 +7,60 @@ import emailSidebar from '../cmps/email-sidebar-cmp.js';
 export default {
     components: {
         emailFilter,
-        // emailList,
         emailStatus,
         emailSidebar,
         emailCompose
     },
     template: `   
-    <div class="email-app" v-if="emails">
+    <div class="email-app" v-if="inboxEmails && sentEmails">
         <email-filter @filtered="setFilter"></email-filter>
-        <!-- <email-list ></email-list> -->
         <div class="app-side-bar">
             <button @click="isComposing=!isComposing">Compose</button>
-            <email-sidebar></email-sidebar>
-            <email-status :emails="emailsToShow"></email-status>
+            <email-sidebar @changeList="updateCurrEmailsList" :totalEmails="numOfEmails" 
+            :unreadEmails="unreadEmails"></email-sidebar>
+            <email-status :totalEmails="numOfEmails" :unreadEmails="unreadEmails"></email-status>
         </div>
         <email-compose @sent="addEmail" v-if="isComposing"></email-compose>
-        <router-view class="email-in-app" @read="setIsRead" :emails="emailsToShow"></router-view>
+        <router-view class="email-in-app" @read="setIsRead" :emails="emailsToShow" :currList="currEmailsList"></router-view>
     </div>
 `,
     data() {
         return {
-            emails: null,
+            inboxEmails: null,
+            sentEmails: null,
+            currEmailsList: 'inbox',
             filterBy: null,
             isComposing: false
         }
     },
     methods: {
+        updateCurrEmailsList(list) {
+            console.log(list)
+            this.currEmailsList = list;
+        },
         setFilter(filter) {
             this.filterBy = filter;
         },
         setIsRead(emailId) {
+            if (this.currEmailsList === 'sent') return;
             setTimeout(emailService.setEmailIsRead, 2000, emailId);
         },
         addEmail(email) {
             this.isComposing = false
-            setTimeout(emailService.addEmail, 2000, email);
+            setTimeout(emailService.sendEmail, 2000, email);
+        },
+        countUnreadEmails() {
+            var count = 0;
+            this.inboxEmails.forEach(email => {
+                if (!email.isRead) count++
+            })
+            return count;
         }
     },
     computed: {
         emailsToShow() {
-            var filteredEmails = this.emails;
+            if (this.currEmailsList === 'inbox') var filteredEmails = this.inboxEmails;
+            else if (this.currEmailsList === 'sent') var filteredEmails = this.sentEmails;
             if (this.filterBy.byName !== '') {
                 filteredEmails = filteredEmails.filter(email => {
                     return email.subject.toLowerCase().includes(this.filterBy.byName.toLowerCase()) ||
@@ -61,11 +74,19 @@ export default {
                 filteredEmails = filteredEmails.filter(email => !email.isRead)
             }
             return filteredEmails;
-        }
+        },
+        numOfEmails() {
+            return this.inboxEmails.length
+        },
+        unreadEmails() {
+            return this.countUnreadEmails();
+        },
     },
     created() {
-        emailService.getEmails()
-            .then(emails => this.emails = emails)
+        emailService.getInboxEmails()
+            .then(emails => this.inboxEmails = emails)
+        emailService.getSentEmails()
+            .then(emails => this.sentEmails = emails)
         this.filterBy = {
             byName: '',
             selectedFilter: 'All'
