@@ -61,7 +61,7 @@ var incomingEmailIntrvl = setInterval(() => {
     gInboxEmails.push(email);
     _sortEmails()
     saveToStorage('inbox-emails', gInboxEmails)
-}, 120 * 1000)
+}, 1000 * 1000)
 
 
 function getInboxEmails() {

@@ -1,16 +1,18 @@
 export default {
     props: ['email'],
     template: `
-   <div class="email-preview" :class="{read: email.isRead}">
+   <div class="email-preview" :class="{read: email.isRead}" @mouseenter="toggleIsHovered" @mouseleave="toggleIsHovered" >
+   <i :class="emailIcon"></i>
        <span class="preview-sent-by">{{email.sentBy}}</span>
         <span class="preview-subject">{{email.subject}} -</span>
         <span class="preview-body">{{email.body}}</span>
-        <span class="preview-sent-at">{{sentAtFormatted}}</span>
+        <span v-if="!isHovered" class="preview-sent-at">{{sentAtFormatted}}</span>
+        <span v-if="isHovered" class="preview-remove-email"><i class="fas fa-trash"></i></span>
     </div>
     `,
     data() {
         return {
-
+            isHovered: false
         }
     },
     methods: {
@@ -41,8 +43,13 @@ export default {
             var month = date.getMonth() + 1
             const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             return `${day}/${month}/${year}`
+        },
+        toggleIsHovered() {
+            this.isHovered = !this.isHovered
+            // console.log('noo')
         }
     },
+
     created() {
 
     },
@@ -56,6 +63,10 @@ export default {
                 if (currDate.getFullYear() === emailDate.getFullYear()) return this.timestampInMonths()
                 else return this.timestampInYears()
             }
+        },
+        emailIcon() {
+            if (this.email.isRead) return 'far fa-envelope-open'
+            else return 'far fa-envelope'
         },
     }
 }

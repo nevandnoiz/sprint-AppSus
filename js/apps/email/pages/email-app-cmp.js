@@ -15,7 +15,7 @@ export default {
     <div class="email-app" v-if="inboxEmails && sentEmails">
         <email-filter @filtered="setFilter"></email-filter>
         <div class="app-side-bar">
-            <button @click="isComposing=!isComposing">Compose</button>
+            <button @click="isComposing=!isComposing"><i class="fas fa-plus"></i> Compose</button>
             <email-sidebar @changeList="updateCurrEmailsList" :totalEmails="numOfEmails" 
             :unreadEmails="unreadEmails"></email-sidebar>
             <email-status :totalEmails="numOfEmails" :unreadEmails="unreadEmails"></email-status>
