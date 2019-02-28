@@ -22,7 +22,7 @@ export default {
             newNote: {
                 id: '',
                 date: '',
-                type: 'text',
+                type: 'textComp',
                 text: {
                     headline: null,
                     body: null
@@ -49,7 +49,7 @@ export default {
             this.newNote = {
                 id: '',
                 date: '',
-                type: 'text',
+                type: 'textComp',
                 text: {
                     headline: '',
                     body: ''
@@ -61,7 +61,6 @@ export default {
         },
         addVideo() {
 
-            `<iframe width="420" height="345" src="https://www.youtube.com/embed/${videoID}">`
         },
         noteFocused() {
             if (!this.newNote.date) this.newNote.date = Date.now();
@@ -89,9 +88,9 @@ export default {
                     this.videoClass = 'fab fa-youtube';
                     this.video = false;
                 } else {
-                    this.newNote.type = 'video'
+                    this.newNote.type = 'videoCmp'
                     this.newNote.url = this.newNote.text.body
-                    this.newNote.text.body = 'video'
+                    this.newNote.text.body = 'videoCmp'
                     this.addNote(this.newNote)
                     this.video = false;
                     this.videoClass = 'fab fa-youtube';
