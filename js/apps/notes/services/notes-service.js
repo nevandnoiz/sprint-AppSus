@@ -15,7 +15,7 @@ export function getNotes(){
 }
 
 export function saveNote(note) {
-    gNotes.push({
+    gNotes.unshift({
         id: makeId(),
         date: note.date,
         type: note.type,
@@ -26,7 +26,8 @@ export function saveNote(note) {
         tags: note.tags,
         color: note.color,
         reminder: note.reminder,
-        url: note.url
+        url: note.url,
+        order: note.order
     })
     saveToStorage(storageKey, gNotes);
 }

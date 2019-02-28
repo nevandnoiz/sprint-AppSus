@@ -4,6 +4,7 @@ export default {
         <div class="opt-btns" v-show="edit">
             <button  @click="$emit('addNote')">save note</button>
             <input class="color-input" value="#fff" ref="color" @focus="$emit('colorFocus')"  @blur="colorChange"/>
+            <i class="fas fa-map-pin" @click="$emit('pinNote')" :style="{ color: pinColor}"></i>
         </div>
 `
     ,
@@ -19,11 +20,17 @@ export default {
             this.$emit('colorblur')
             const colorInput = this.$refs.color;
             this.newNote.color = colorInput.value
-        }
+        },
     },
     mounted() {
         const elem = this.$refs.color;
         const hueb = new Huebee(elem, {
         });
+    },
+    computed: {
+        pinColor(){
+            if (this.newNote.order) return 'red'
+            return 'black'
+        }
     }
 }

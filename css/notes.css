@@ -17,6 +17,7 @@
     border-radius: 7px;
     margin:50px;
     justify-content: space-between;
+    transition: .3s;
 }    
 
 .new-note input{
@@ -25,6 +26,7 @@
     font-size: 20px;
     padding: 8px;
     outline: none;
+    transition: .3s;
 }
 
 .new-note textarea{
@@ -33,7 +35,8 @@
     padding: 8px;
     outline: none;
     width: 80%;
-    resize: none
+    resize: none;
+    transition: .3s;
 }
 
 .upload-btns{
@@ -50,6 +53,13 @@
 
 .createMode textarea{
     width: 97%;
+}
+
+.notes-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    justify-items: center;
+    width: 100%;
 }
 
 .text-note{
@@ -69,8 +79,15 @@
     margin: 10px;
     transition: .2s ease
 }
+.note-card > div{
+    display: flex;
+    justify-content: space-between;
+}
+.note-card > div > i{
+    font-size: 17px;
+}
 
-.note-card > h2{
+.note-card > div >h2{
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
     padding-top: 10px;
@@ -120,5 +137,28 @@
     font-size: 25px;
     margin:5px;
     color: #009acd;
+    cursor: pointer;
+}
+
+input.color-input {
+    background-color: rgb(170, 204, 136);
+    color: rgb(34, 34, 34);
+    font-size: 0px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.opt-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    width: 150px;
+}
+
+.fa-map-pin {
+    font-size: 22px;
     cursor: pointer;
 }

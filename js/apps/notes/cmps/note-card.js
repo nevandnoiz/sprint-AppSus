@@ -3,11 +3,19 @@ const textComp = {
     name: 'textComp',
     props: ['note'],
     template: `
-     <div class="note-card" :style="{ background: note.color}">
-            <h2>{{note.text.headline}}</h2>
+     <div class="note-card" :style="{ background: note.color, order: noteOrder}">
+            <div>
+                <h2>{{note.text.headline}}</h2>
+                <i class="fas fa-map-pin" v-if="note.order"></i>
+            </div>
             <p>{{note.text.body}}</p>
         </div>
-    `
+    `,
+    computed: {
+        noteOrder(){
+            return this.note.order ? -1 : 0
+        }
+    }
 }
 const videoCmp = {
     name: 'videoCmp',

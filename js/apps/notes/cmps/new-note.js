@@ -7,7 +7,7 @@ export default {
         <div class="text-note">
             <input v-if="edit" type="text" v-model="newNote.text.headline" ref="headline"  @blur="noteBlur" placeholder="Title" :style="{ background: newNote.color}"> 
             <textarea cols="30" rows="5" v-model="newNote.text.body" @focus="noteFocused" @blur="noteBlur" ref="body" :placeholder="textareaPlaceholder" :style="{ background: newNote.color}"></textarea>
-            <op-btns :edit="edit" @addNote="addNote" :newNote="newNote" @colorFocus="colorFocus" @colorblur="colorblur"></op-btns>
+            <op-btns :edit="edit" @addNote="addNote" :newNote="newNote" @colorFocus="btnsFocus" @colorblur="btnBlur" @pinNote="pinNote"></op-btns>
         </div>
         <div class="upload-btns" v-if="!edit">
         <i :class="videoClass" @click="uploadVideo"></i>
@@ -30,7 +30,8 @@ export default {
                 },
                 tags: null,
                 color: 'white',
-                reminder: null
+                reminder: null,
+                order: false
             },
             edit: false,
             video: false,
@@ -62,6 +63,7 @@ export default {
                 tags: null,
                 color: 'white',
                 reminder: null,
+                order: 0
             }
         },
         noteFocused() {
@@ -84,7 +86,7 @@ export default {
                     this.addNote()
                     this.newNote.color = '#FFF'
                 }, 0)
-            }, 1)
+            }, 100)
         },
         uploadVideo() {
             if (!this.video) {
@@ -104,15 +106,18 @@ export default {
                 }
             }
         },
-        colorFocus() {  
+        btnsFocus() {  
             this.optedit = true;
         },
-        colorblur() {
-            this.optedit = false;
+        btnBlur() {
             const body = this.$refs.body;
             body.focus()
-            
-    
+            this.optedit = false;
+        },
+        pinNote(){
+            this.btnsFocus()
+            this.newNote.order = !this.newNote.order
+            this.btnBlur()
         }
     },
 }
