@@ -163,14 +163,19 @@ input.color-input {
 
 .fa-map-pin {
     font-size: 22px;
+    color: gray;
     cursor: pointer;
+}
+.fa-map-pin:hover {
+    color: black;
 }
 
 .fa-trash {
     cursor: pointer;
     margin-left: 10px;
+    color: gray;
 }
 
 .fa-trash:hover {
-    color: lightcoral
+    color: black
 }

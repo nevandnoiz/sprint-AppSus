@@ -29,7 +29,7 @@ export default {
                     body: null
                 },
                 tags: null,
-                color: 'white',
+                color: '#ffffff',
                 reminder: null,
                 order: false
             },
@@ -50,7 +50,7 @@ export default {
     },
     methods: {
         addNote() {
-            if (!this.newNote.text.headline && !this.newNote.text.body) return
+            if (!this.newNote.text.headline && !this.newNote.text.body) return            
             saveNote(this.newNote)
             this.newNote = {
                 id: '',
@@ -61,7 +61,7 @@ export default {
                     body: ''
                 },
                 tags: null,
-                color: 'white',
+                color: '#ffffff',
                 reminder: null,
                 order: 0
             }

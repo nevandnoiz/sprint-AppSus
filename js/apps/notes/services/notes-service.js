@@ -32,7 +32,7 @@ export function saveNote(note) {
 }
 
 
-export function deleteNote(noteid, idx) {
+export function deleteNote(noteid) {
     const noteToDelet = getNoteIdx(noteid)
     gNotes.splice(noteToDelet, 1)
     saveToStorage(storageKey, gNotes);

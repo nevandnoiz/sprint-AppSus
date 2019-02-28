@@ -18,7 +18,7 @@ export default {
     `,
     data() {
         return {
-            color: '#ffffff'
+            color: ''
         }
     },
     computed: {
@@ -41,5 +41,8 @@ export default {
         color: function(val) {
             updateColor(val, this.note)
         }
+    },
+    created() {
+        this.color = this.note.color
     }
 }
