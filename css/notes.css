@@ -77,7 +77,10 @@
     border: 1px solid #dadce0;
     border-radius: 8px;
     margin: 10px;
-    transition: .2s ease
+    transition: .2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .note-card > div{
     display: flex;
@@ -161,4 +164,13 @@ input.color-input {
 .fa-map-pin {
     font-size: 22px;
     cursor: pointer;
+}
+
+.fa-trash {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.fa-trash:hover {
+    color: lightcoral
 }

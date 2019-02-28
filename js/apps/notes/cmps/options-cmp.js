@@ -28,7 +28,7 @@ export default {
         });
     },
     computed: {
-        pinColor(){
+        pinColor() {
             if (this.newNote.order) return 'red'
             return 'black'
         }

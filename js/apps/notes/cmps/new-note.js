@@ -106,7 +106,7 @@ export default {
                 }
             }
         },
-        btnsFocus() {  
+        btnsFocus() {
             this.optedit = true;
         },
         btnBlur() {
@@ -114,7 +114,7 @@ export default {
             body.focus()
             this.optedit = false;
         },
-        pinNote(){
+        pinNote() {
             this.btnsFocus()
             this.newNote.order = !this.newNote.order
             this.btnBlur()

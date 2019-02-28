@@ -18,6 +18,6 @@ export default {
     components: {
         noteCard
     },
-    created(){
+    created() {
     }
 }
