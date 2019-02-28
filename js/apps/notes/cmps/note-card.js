@@ -1,10 +1,9 @@
-// import notesAppCmp from "../pages/notes-app-cm";
 
 const textComp = {
     name: 'textComp',
     props: ['note'],
     template: `
-     <div class="note-card">
+     <div class="note-card" :style="{ background: note.color}">
             <h2>{{note.text.headline}}</h2>
             <p>{{note.text.body}}</p>
         </div>
@@ -14,8 +13,8 @@ const videoCmp = {
     name: 'videoCmp',
     props: ['note'],
     template: `
-     <div class="note-card">
-        <iframe width="200" height="100" :src="videoID"></iframe>
+     <div class="video-card">
+        <iframe width="230px" height="" :src="videoID"></iframe>
     </div>
     `,
     computed: {
@@ -27,7 +26,7 @@ const videoCmp = {
             youtubeUrl += videoid
             return youtubeUrl
         }
-    }
+    }, 
 }
 
 
