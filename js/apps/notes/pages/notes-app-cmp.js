@@ -1,24 +1,27 @@
 import newNote from '../cmps/new-note.js';
 import notesBoard from '../cmps/notes-board.js';
+import search from '../cmps/search.js';
 import { getNotes } from '../services/notes-service.js'
 
 
 export default {
     template: `   
     <section class=notes-app>
-        <new-note @updateNotes="updateNotes"></new-note>
+        <new-note></new-note>
+        <search @test=test></search>  
         <notes-board :notes="notes"></notes-board>
     </section>
 `,
     data() {
         return {
-            notes: ''
+            notes: '',
+            searchVal: '',
+            searchCat: ''
         }
     },
     methods: {
-        updateNotes(){
-            console.log('momo');
-            
+        test(val){
+            this.notes = getNotes(val)
         }
     },
     computed: {
@@ -26,11 +29,13 @@ export default {
     },
     components: {
         newNote,
-        notesBoard
+        notesBoard,
+        search
     },
     watch:{
+        searchVal: (val) => this.notes = getNotes(val)
     },
     created() {
-        this.notes = getNotes()
+        this.notes = getNotes('')
     },
 }

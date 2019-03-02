@@ -8,11 +8,16 @@
     justify-content: center;
 }
 
+.container-notes{
+    justify-content: center;
+    width: 750px;
+}
+
 .new-note{
     display: flex;
     height: 50px;
     width: 500px;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
     border: 0;
     border-radius: 7px;
     margin:50px;
@@ -57,8 +62,9 @@
 
 .notes-board {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     justify-items: center;
+    grid-gap: 5px;
     width: 100%;
 }
 
@@ -73,7 +79,7 @@
 
 .note-card {
     width: 240px;
-    min-height: 50px;
+    min-height: 115px;
     border: 1px solid #dadce0;
     border-radius: 8px;
     margin: 10px;
@@ -103,6 +109,7 @@
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 10px;
+    flex-grow: 1
 }
 
 .note-card:hover {
@@ -194,4 +201,47 @@ input.color-input {
   .component-fade-enter, .component-fade-leave-to
   /* .component-fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+  }
+
+
+  .modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-content > *{
+      border: none;
+      outline: none;
+      font-size: 20px;
+      margin-bottom: 20px;
+      padding-left: 8px;   
+  }
+
+  .modal-content input{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+  }
+
+  .new-note textarea{
+    font-family: 'Roboto', sans-serif;
   }

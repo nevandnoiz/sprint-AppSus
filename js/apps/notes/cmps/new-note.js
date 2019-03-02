@@ -12,8 +12,8 @@ export default {
         <div class="upload-btns" v-if="!edit">
         <i :class="videoClass" @click="uploadVideo"></i>
     </div>
-       
-</iframe>
+    
+
 
     </div>
 `
@@ -34,9 +34,9 @@ export default {
                 order: false
             },
             edit: false,
+            optedit: false,
             video: false,
             videoClass: 'fab fa-youtube',
-            optedit: false
         }
     },
     computed: {

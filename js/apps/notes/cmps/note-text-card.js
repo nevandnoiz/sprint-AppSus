@@ -1,27 +1,36 @@
-import { deleteNote, updateColor, removePin, addPin } from '../services/notes-service.js'
+import { deleteNote, updateColor, removePin, addPin, updateNote } from '../services/notes-service.js'
+import modal from '../cmps/modal-cmp.js'
 export default {
     name: 'textComp',
     props: ['note'],
     template: `
-     <div class="note-card" :style="{ background: note.color, order: noteOrder}" @mouseenter="hover" @mouseleave="hover">
+    <div>
+        <div class="note-card" :style="{ background: note.color, order: noteOrder, display: display}" @mouseenter="toggleBtns" @mouseleave="toggleBtns" @click="displayModal = true">
             <div>
                 <h2>{{note.text.headline}}</h2>
-                <i class="fas fa-map-pin" v-if="note.order" @click="removePin(note)"></i>
+                <i class="fas fa-map-pin" v-if="note.order" @click.stop="removePin(note)"></i>
             </div>
-            <p>{{note.text.body}}</p>
-            <transition name="fade">
-                <div class=btns v-show="hover1">
-                    <i class="fas fa-trash"  @click="deleteNote(note.id)"></i>
-                    <i class="fas fa-map-pin" v-if="!note.order" @click="addPin(note)"></i>
-                    <input type="color" id="head" name="head" v-model:value="color">
-                </div>
-            </transition>
+               <p>{{note.text.body}}</p>
+                <transition name="fade">
+                    <div class="btns" v-show="showBtns">
+                        <i class="fas fa-trash"  @click.stop="deleteNote(note.id)"></i>
+                        <i class="fas fa-map-pin" v-if="!note.order" @click.stop="addPin(note)"></i>
+                        <input @click.stop = "" class="color-input" :value="color" ref="color"/>
+                    </div>
+                </transition>
         </div>
-    `,
+        <transition name="fade">
+            <modal :note="note" v-if="displayModal" @closeModal="displayModal = false" @updateNote="updateNote"></modal>
+        </transition>
+
+    </div>
+       `,
     data() {
         return {
-            color: '',
-            hover1: false
+            color: '#ffffff',
+            showBtns: false,
+            display: 'flex',
+            displayModal: false
         }
     },
     computed: {
@@ -30,25 +39,35 @@ export default {
         }
     },
     methods: {
+        toggleBtns() {
+            this.showBtns = !this.showBtns
+        },
         deleteNote(noteid) {
             deleteNote(noteid)
+            this.display = 'none';
         },
         removePin(note) {
-            this.hover1 = false;
+            this.showBtns = false;
             removePin(note)
         },
         addPin(note) {
-            this.hover1 = false;
+            this.showBtns = false;
             addPin(note)
         },
-        hover() {
-            this.hover1 = !this.hover1
+        updateNote(body, headline) {
+            updateNote(this.note, body, headline)
         }
     },
+    components: { modal },
     watch: {
         color: function (val) {
             updateColor(val, this.note)
-        }
+        },
+    },
+    mounted() {
+        const elem = this.$refs.color;
+        const hueb = new Huebee(elem, {});
+        hueb.on('change', (color) => this.color = color)
     },
     created() {
         this.color = this.note.color

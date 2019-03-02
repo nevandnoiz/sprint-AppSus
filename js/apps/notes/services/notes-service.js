@@ -3,15 +3,16 @@ import { getFromStorage, saveToStorage, makeId } from '../../../services/util-se
 
 const storageKey = 'notes';
 const gNotes = getNotesFromStorage(storageKey);
-window.notes=gNotes
+window.notes = gNotes
 
 function getNotesFromStorage(key) {
     const notes = getFromStorage(key);
     return notes ? notes : [];
 }
 
-export function getNotes() {
-    return gNotes;
+export function getNotes(val) {
+    if (!val) return gNotes
+    return gNotes.filter(note => note.text.body.includes(val))
 }
 
 export function saveNote(note) {
@@ -45,7 +46,7 @@ function getNoteIdx(noteid) {
     });
 }
 
-export function updateColor(val, note){
+export function updateColor(val, note) {
     note.color = val;
     saveToStorage(storageKey, gNotes);
 }
@@ -57,5 +58,11 @@ export function removePin(note) {
 
 export function addPin(note) {
     note.order = true;
+    saveToStorage(storageKey, gNotes);
+}
+
+export function updateNote(note, body, headline) {
+    note.text.body = body;
+    note.text.headline = headline
     saveToStorage(storageKey, gNotes);
 }
