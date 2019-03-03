@@ -15,7 +15,9 @@ export default {
     template: `   
     <div class="email-app" v-if="inboxEmails">
         <email-filter @filtered="setFilter"></email-filter>
-        <div class="mobile-nav"><button @click="openSidebar=!openSidebar">&#9776;</button></div>
+        <div class="mobile-nav">
+            <button @click="openSidebar=!openSidebar">&#9776;</button>
+        </div>
         <div class="app-side-bar" :class="{'open-side-bar': openSidebar}">
             <button @click="isComposing=!isComposing"><i class="fas fa-plus"></i> Compose</button>
             <email-sidebar :totalEmails="numOfEmails" @changeList="changeList" 
@@ -23,7 +25,7 @@ export default {
             <email-status :totalEmails="numOfEmails" :unreadEmails="unreadEmails"></email-status>
         </div>
             <email-compose v-if="isComposing" @sent="addEmail" @closeCompose="closeCompose"></email-compose>
-        <router-view class="email-in-app" @emailRead="setEmailRead" @delete="deleteEmail" @toggleRead="toggleIsRead" @mobileCompose="isComposing=!isComposing" :emails="emailsToShow" :currList="emailsList"></router-view>
+        <router-view @emailRead="setEmailRead" @delete="deleteEmail" @toggleRead="toggleIsRead" @mobileCompose="isComposing=!isComposing" :emails="emailsToShow" :currList="emailsList"></router-view>
     </div>
 `,
     data() {
