@@ -65,7 +65,7 @@ export default {
     },
     computed: {
         background(){
-            return `url('../../../../img/${this.backgroungImg}.jpg')`
+            return `url('./img/${this.backgroungImg}.jpg')`
         }
     },
 }
