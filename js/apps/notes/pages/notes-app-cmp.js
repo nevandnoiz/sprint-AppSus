@@ -10,16 +10,18 @@ import navBar from '../../../cmps/nav-bar.js';
 
 export default {
     template: `   
-    <div class="notes-app-div" ref="notesApp">
+    <div class="notes-app-div" >
+        <div class="bcg" ref="notesApp"></div>
 
-        <nav-bar></nav-bar>
-        <section class=notes-app>
-            <new-note v-if="newNote" @displayTodo="newNote = false" ></new-note>
-            <new-todo  v-if="!newNote" @displayNote="newNote = true"></new-todo>
-            <search @search=search></search>  
-            <notes-board :notes="notes"></notes-board>
-        </section>
-    </div>
+            <nav-bar></nav-bar>
+            <section class=notes-app>
+                <new-note v-if="newNote" @displayTodo="newNote = false" ></new-note>
+                <new-todo  v-if="!newNote" @displayNote="newNote = true"></new-todo>
+                <search @search=search></search>  
+                <notes-board :notes="notes"></notes-board>
+            </section>
+        </div>
+    
 `,
     data() {
         return {

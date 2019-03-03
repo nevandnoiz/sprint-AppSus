@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto:400,700');
 
-.notes-app-div{
-    background: fixed;
+.bcg{
+    /* background-attachment: fixed; */
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 0 5%;
+    /* background-position: 0 5%; */
+    position: fixed;
+    top: 0;
+    z-index: -1;
     height: 100vh;
+    width: 100vw;
 }
 
 .notes-app {
