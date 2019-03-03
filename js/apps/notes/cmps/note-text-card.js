@@ -1,6 +1,8 @@
 import { deleteNote, updateColor, removePin, addPin, updateNote } from '../services/notes-service.js'
 import modal from '../cmps/modal-cmp.js'
 import cardBtns from '../cmps/text-card-btns-cmp.js'
+import { eventBus } from '../../../main.js';
+
 export default {
     name: 'textComp',
     props: ['note'],
@@ -55,11 +57,17 @@ export default {
         updateNote(body, headline) {
             updateNote(this.note, body, headline)
         },
-        changeColor(color){
-            this.color=color
+        changeColor(color) {
+            this.color = color
         },
-        sendToMail(note){
-            console.log(note);
+        sendToMail(note) {
+            eventBus.$emit('openCompose')
+            setTimeout(() => {
+                this.$router.push(`/email`)
+            }, 1000)
+            setTimeout(() => {
+                eventBus.$emit('noteToMessage', note)
+            }, 1600)
         }
 
     },

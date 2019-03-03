@@ -33,7 +33,8 @@ export default {
             emailsList: null,
             filterBy: null,
             isComposing: false,
-            openSidebar: false
+            openSidebar: false,
+            noteToSend: null
         }
     },
     methods: {
@@ -70,11 +71,7 @@ export default {
             setTimeout(() => { eventBus.$emit('composeReply', email) }, 0)
         },
         noteToMessage(note) {
-            console.log(note)
-            setTimeout(() => { 
-                this.isComposing = true;
-                eventBus.$emit('composeNote', note)
-        console.log(this.isComposing) }, 900)
+            setTimeout(() => { eventBus.$emit('composeNote', note) }, 300)
         },
         countUnreadEmails() {
             var count = 0;
@@ -127,6 +124,7 @@ export default {
         },
             eventBus.$on('reply', this.replyEmail)
         eventBus.$on('toggleSidebar', this.toggleSidebar)
+        eventBus.$on('openCompose', this.isComposing = true)
         eventBus.$on('noteToMessage', this.noteToMessage)
     },
     mounted() {
