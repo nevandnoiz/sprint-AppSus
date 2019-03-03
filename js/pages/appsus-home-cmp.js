@@ -22,7 +22,7 @@ export default {
         switchBackground(direction) {
             if (direction === 'right') {
                 this.currBackground++
-                if (this.currBackground === 9) this.currBackground = 1
+                if (this.currBackground === 10) this.currBackground = 1
             }
             else if (direction === 'left') {
                 this.currBackground--
