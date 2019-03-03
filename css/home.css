@@ -1,12 +1,11 @@
-
-
-
 .home-page {
     background-image: url("/img/1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 0 5%;
     height: 100vh;
+    display: grid;
+    grid-template: 50px 1fr/1fr;
 }
    
 .nav-bar{
@@ -36,5 +35,30 @@
 }
 
 .change-background{
-    margin: 100px
+    align-self:center;
+    display: flex;
+    grid-area: 2/1/2/1;
+    width: 100vw;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    padding: 0 10px;
+}
+
+.change-background-btn{
+    opacity:0;
+    border:none;
+    background:none;
+    font-size: 40px;
+    color:rgb(189, 189, 189);
+    cursor: pointer;
+    padding:30px;
+    transition: 0.3s;
+}
+
+.change-background-btn:hover{
+    opacity:1
+}
+
+.change-background-btn:active{
+    text-shadow: 0 0 2px black
 }

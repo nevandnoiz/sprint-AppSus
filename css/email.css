@@ -277,8 +277,13 @@
 }
 
 .mobile-nav button{
+    background:none;
+    border:none;
+    color:white;
+    font-weight: bold;
+    font-size: 24px;
     cursor:pointer;
-    margin-left: 5px;
+    margin-left: 9px;
 }
 
 .email-lists-section{
