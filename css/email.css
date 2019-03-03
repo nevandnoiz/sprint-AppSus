@@ -244,11 +244,11 @@
     display:none;
     grid-area:2/1/2/3;
     justify-content:flex-end;
-    align-self:center;
+    /* align-self:center; */
     border:solid darkslategray;
-    border-width:1px 0;
+    border-width:1px 0 0 0;
     padding: 12px;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
 .mobile-nav button{
@@ -444,7 +444,7 @@
         transform: translate(0,70px);
     }
     .email-app{
-        padding: 1px;
+        padding: 0;
         grid-template:70px 50px 1fr/1fr;
         height: 98vh;
     }
@@ -472,7 +472,6 @@
     .email-compose {
         width: 100vw;
         height: 100vh;
-        /* transform:translate(0,800px); */
         bottom: initial;
         right: initial;
         grid-area: 1/1/1/1;
