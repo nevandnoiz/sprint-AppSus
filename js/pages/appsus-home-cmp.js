@@ -32,9 +32,8 @@ export default {
             this.saveCurrBackground();
         },
         setBackground() {
-            console.log(this.currBackground)
             const home = this.$refs.home
-            home.style.backgroundImage = `url('/img/${this.currBackground}.jpg')`
+            home.style.backgroundImage = `url('../img/${this.currBackground}.jpg')`
         },
         saveCurrBackground() {
             homeService.setBackground(this.currBackground)

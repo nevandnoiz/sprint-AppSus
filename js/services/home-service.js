@@ -21,7 +21,6 @@ function getBackground() {
 }
 
 function setBackground(background) {
-    console.log(typeof background)
     gCurrBackground = background;
     saveToStorage('home-bcg', gCurrBackground)
 }
