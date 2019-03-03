@@ -61,7 +61,6 @@ export default {
             this.color = color
         },
         sendToMail(note) {
-            eventBus.$emit('openCompose')
             setTimeout(() => {
                 this.$router.push(`/email`)
             }, 1000)

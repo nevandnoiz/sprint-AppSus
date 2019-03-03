@@ -71,6 +71,7 @@ export default {
             setTimeout(() => { eventBus.$emit('composeReply', email) }, 0)
         },
         noteToMessage(note) {
+            this.isComposing = true
             setTimeout(() => { eventBus.$emit('composeNote', note) }, 300)
         },
         countUnreadEmails() {
@@ -124,7 +125,6 @@ export default {
         },
             eventBus.$on('reply', this.replyEmail)
         eventBus.$on('toggleSidebar', this.toggleSidebar)
-        eventBus.$on('openCompose', this.isComposing = true)
         eventBus.$on('noteToMessage', this.noteToMessage)
     },
     mounted() {
