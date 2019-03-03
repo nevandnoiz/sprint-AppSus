@@ -545,6 +545,7 @@
     }
     .email-filter .filter-controls.mobile{
         animation: filterAnim 0.5s;
+        border-radius: 10px;
     }
     @keyframes filterAnim {
         from {opacity:0;}
@@ -555,6 +556,7 @@
         margin-left:5px;
     }
     .email-filter .filter-controls.mobile select{
+        border-radius: 10px;
         width:16px;
     }
     .email-compose {

@@ -17,7 +17,7 @@ export default {
         </div>
         <div class="mobile-nav">
             <email-filter @filtered="emitFilter"></email-filter>
-            <button>&#9776;</button>
+            <button @click="emitToggleSidebar">&#9776;</button>
         </div>
     </div>
     `,
