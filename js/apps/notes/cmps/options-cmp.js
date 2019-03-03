@@ -1,9 +1,10 @@
 export default {
     props: ['edit', 'newNote'],
     template: `   
-        <div class="opt-btns" v-show="edit">
+        <div class="opt-btns" v-show="edit" @click.stop=''>
             <button  @click="$emit('addNote')">save note</button>
-            <input class="color-input" value="#fff" ref="color" @focus="$emit('colorFocus')"  @blur="colorChange"/>
+            <input class="color-input" value="#ffffff" ref="color" @focus="$emit('colorFocus')"  @blur="$emit('colorblur')"/>
+            <i class="fas fa-map-pin" @click="$emit('pinNote')" :style="{ color: pinColor}"></i>
         </div>
 `
     ,
@@ -11,19 +12,15 @@ export default {
         return {
         }
     },
-    methods: {
-
-    },
-    methods: {
-        colorChange() {
-            this.$emit('colorblur')
-            const colorInput = this.$refs.color;
-            this.newNote.color = colorInput.value
-        }
-    },
     mounted() {
         const elem = this.$refs.color;
-        const hueb = new Huebee(elem, {
-        });
+        const hueb = new Huebee(elem, {});
+        hueb.on('change', (color) => this.newNote.color = color)
+    },
+    computed: {
+        pinColor() {
+            if (this.newNote.order) return 'red'
+            return 'black'
+        }
     }
 }

@@ -8,15 +8,21 @@
     justify-content: center;
 }
 
+.container-notes{
+    justify-content: center;
+    width: 750px;
+}
+
 .new-note{
     display: flex;
     height: 50px;
     width: 500px;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
     border: 0;
     border-radius: 7px;
     margin:50px;
     justify-content: space-between;
+    transition: .3s;
 }    
 
 .new-note input{
@@ -25,6 +31,7 @@
     font-size: 20px;
     padding: 8px;
     outline: none;
+    transition: .3s;
 }
 
 .new-note textarea{
@@ -33,7 +40,8 @@
     padding: 8px;
     outline: none;
     width: 80%;
-    resize: none
+    resize: none;
+    transition: .3s;
 }
 
 .upload-btns{
@@ -52,6 +60,14 @@
     width: 97%;
 }
 
+.notes-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    justify-items: center;
+    grid-gap: 5px;
+    width: 100%;
+}
+
 .text-note{
     display: flex;
     flex-flow: column;
@@ -63,14 +79,24 @@
 
 .note-card {
     width: 240px;
-    min-height: 50px;
+    min-height: 115px;
     border: 1px solid #dadce0;
     border-radius: 8px;
     margin: 10px;
-    transition: .2s ease
+    transition: .2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.note-card > div{
+    display: flex;
+    justify-content: space-between;
+}
+.note-card > div > i{
+    font-size: 17px;
 }
 
-.note-card > h2{
+.note-card > div >h2{
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
     padding-top: 10px;
@@ -83,6 +109,7 @@
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 10px;
+    flex-grow: 1
 }
 
 .note-card:hover {
@@ -122,3 +149,99 @@
     color: #009acd;
     cursor: pointer;
 }
+
+input.color-input {
+    background-color: rgb(170, 204, 136);
+    color: rgb(34, 34, 34);
+    font-size: 0px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.opt-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    width: 150px;
+}
+
+.fa-map-pin {
+    font-size: 22px;
+    color: gray;
+    cursor: pointer;
+}
+.fa-map-pin:hover {
+    color: black;
+}
+
+.fa-trash {
+    cursor: pointer;
+    margin-left: 10px;
+    color: gray;
+}
+
+.fa-trash:hover {
+    color: black
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .3s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
+
+  .component-fade-enter-active, .component-fade-leave-active {
+    transition: opacity .5s ease;
+  }
+  .component-fade-enter, .component-fade-leave-to
+  /* .component-fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
+
+  .modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-content > *{
+      border: none;
+      outline: none;
+      font-size: 20px;
+      margin-bottom: 20px;
+      padding-left: 8px;   
+  }
+
+  .modal-content input{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+  }
+
+  .new-note textarea{
+    font-family: 'Roboto', sans-serif;
+  }

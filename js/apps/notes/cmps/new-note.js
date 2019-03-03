@@ -7,13 +7,13 @@ export default {
         <div class="text-note">
             <input v-if="edit" type="text" v-model="newNote.text.headline" ref="headline"  @blur="noteBlur" placeholder="Title" :style="{ background: newNote.color}"> 
             <textarea cols="30" rows="5" v-model="newNote.text.body" @focus="noteFocused" @blur="noteBlur" ref="body" :placeholder="textareaPlaceholder" :style="{ background: newNote.color}"></textarea>
-            <op-btns :edit="edit" @addNote="addNote" :newNote="newNote" @colorFocus="colorFocus" @colorblur="colorblur"></op-btns>
+            <op-btns :edit="edit" @addNote="addNote" :newNote="newNote" @colorFocus="btnsFocus" @colorblur="btnBlur" @pinNote="pinNote"></op-btns>
         </div>
         <div class="upload-btns" v-if="!edit">
         <i :class="videoClass" @click="uploadVideo"></i>
     </div>
-       
-</iframe>
+    
+
 
     </div>
 `
@@ -29,13 +29,14 @@ export default {
                     body: null
                 },
                 tags: null,
-                color: 'white',
-                reminder: null
+                color: '#ffffff',
+                reminder: null,
+                order: false
             },
             edit: false,
+            optedit: false,
             video: false,
             videoClass: 'fab fa-youtube',
-            optedit: false
         }
     },
     computed: {
@@ -49,7 +50,7 @@ export default {
     },
     methods: {
         addNote() {
-            if (!this.newNote.text.headline && !this.newNote.text.body) return
+            if (!this.newNote.text.headline && !this.newNote.text.body) return            
             saveNote(this.newNote)
             this.newNote = {
                 id: '',
@@ -60,8 +61,9 @@ export default {
                     body: ''
                 },
                 tags: null,
-                color: 'white',
+                color: '#ffffff',
                 reminder: null,
+                order: 0
             }
         },
         noteFocused() {
@@ -82,9 +84,9 @@ export default {
                     if (body === document.activeElement || headline === document.activeElement) return;
                     this.edit = false;
                     this.addNote()
-                    this.newNote.color = '#FFF'
+                    this.newNote.color = '#ffffff'
                 }, 0)
-            }, 1)
+            }, 100)
         },
         uploadVideo() {
             if (!this.video) {
@@ -104,15 +106,18 @@ export default {
                 }
             }
         },
-        colorFocus() {  
+        btnsFocus() {
             this.optedit = true;
         },
-        colorblur() {
-            this.optedit = false;
+        btnBlur() {
             const body = this.$refs.body;
             body.focus()
-            
-    
+            this.optedit = false;
+        },
+        pinNote() {
+            this.btnsFocus()
+            this.newNote.order = !this.newNote.order
+            this.btnBlur()
         }
     },
 }
