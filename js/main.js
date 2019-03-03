@@ -1,6 +1,3 @@
-
-// import booksHeader from './cmps/books-header-cmp.js';
-
 import myRoutes from './routes.js';
 
 const myRouter = new VueRouter({routes: myRoutes})

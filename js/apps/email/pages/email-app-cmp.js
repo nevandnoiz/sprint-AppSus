@@ -17,8 +17,8 @@ export default {
         <email-nav @filtered="setFilter"></email-nav>
             <div class="app-side-bar" :class="{'open-side-bar': openSidebar}">
                 <button @click="isComposing=!isComposing"><i class="fas fa-plus"></i> Compose</button>
-                <email-sidebar :totalEmails="numOfEmails" @changeList="changeList" 
-            :unreadEmails="unreadEmails"></email-sidebar>
+                <email-sidebar :totalEmails="numOfEmails" @changeList="changeList"
+                :unreadEmails="unreadEmails"></email-sidebar>
                 <email-status :totalEmails="numOfEmails" :unreadEmails="unreadEmails"></email-status>
             </div>
                 <email-compose v-if="isComposing" @sent="addEmail" @closeCompose="closeCompose"></email-compose>
