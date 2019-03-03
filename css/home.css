@@ -42,6 +42,7 @@
     justify-content: space-between;
     margin-bottom: 50px;
     padding: 0 10px;
+    outline: 0;
 }
 
 .change-background-btn{
@@ -53,6 +54,7 @@
     cursor: pointer;
     padding:30px;
     transition: 0.3s;
+    outline: 0;
 }
 
 .change-background-btn:hover{

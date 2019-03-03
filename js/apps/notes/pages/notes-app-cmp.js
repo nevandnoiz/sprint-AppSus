@@ -12,8 +12,8 @@ export default {
 
         <nav-bar></nav-bar>
         <section class=notes-app>
-            <new-note></new-note>
-            <new-todo></new-todo>
+            <new-note v-if="newNote" @displayTodo="newNote = false" ></new-note>
+            <new-todo  v-if="!newNote" @displayNote="newNote = true"></new-todo>
             <search @search=search></search>  
             <notes-board :notes="notes"></notes-board>
         </section>
@@ -23,7 +23,8 @@ export default {
         return {
             notes: '',
             searchVal: '',
-            searchCat: ''
+            searchCat: '',
+            newNote: true,
         }
     },
     methods: {

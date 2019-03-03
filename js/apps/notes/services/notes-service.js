@@ -12,7 +12,18 @@ function getNotesFromStorage(key) {
 
 export function getNotes(val) {
     if (!val) return gNotes
-    return gNotes.filter(note => note.text.body.includes(val) || note.text.headline.includes(val))
+    return gNotes.filter(note => {
+        val = val.toLowerCase()
+        if (note.type !== 'todo') {
+            return note.text.body.toLowerCase().includes(val) || note.text.headline.toLowerCase().includes(val);
+        } else {
+            if (note.data.headline.toLowerCase().includes(val)) return true;
+            for (let i = 0; i < note.data.todos.length; i++) {
+                const todo = note.data.todos[i].text.toLowerCase();
+                return todo.includes(val);
+            }
+        }
+    })
 }
 
 export function saveNote(note) {
@@ -91,7 +102,7 @@ export function updateNote(note, body, headline) {
     saveToStorage(storageKey, gNotes);
 }
 
-export function updateTodoItem(note, i){
+export function updateTodoItem(note, i) {
     note.data.todos[i].done = !note.data.todos[i].done;
     saveToStorage(storageKey, gNotes);
 }

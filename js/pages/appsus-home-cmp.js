@@ -33,7 +33,7 @@ export default {
         },
         setBackground() {
             const home = this.$refs.home
-            home.style.backgroundImage = `url('./img/${this.currBackground}.jpg')`
+            home.style.backgroundImage = this.background
         },
         saveCurrBackground() {
             homeService.setBackground(this.currBackground)
@@ -43,7 +43,9 @@ export default {
         navBar
     },
     computed: {
-
+        background(){
+            return `url('./img/${this.currBackground}.jpg')`
+        }
     },
     created() {
         homeService.getBackground()
