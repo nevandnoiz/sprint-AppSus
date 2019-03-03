@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto:400,700');
 
+.notes-app-div{
+    background: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 5%;
+    height: 100vh;
+}
 
 .notes-app {
     display: flex;
@@ -343,3 +350,4 @@ input.color-input {
     }
  }
  
+

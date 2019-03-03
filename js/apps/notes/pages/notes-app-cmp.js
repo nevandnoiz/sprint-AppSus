@@ -4,11 +4,13 @@ import notesBoard from '../cmps/notes-board.js';
 import search from '../cmps/search.js';
 import { getNotes } from '../services/notes-service.js'
 import { eventBus } from '../../../main.js';
+import { getFromStorage } from '../../../services/util-service.js';
 import navBar from '../../../cmps/nav-bar.js';
+
 
 export default {
     template: `   
-    <div>
+    <div class="notes-app-div" ref="notesApp">
 
         <nav-bar></nav-bar>
         <section class=notes-app>
@@ -25,6 +27,7 @@ export default {
             searchVal: '',
             searchCat: '',
             newNote: true,
+            backgroungImg: ''
         }
     },
     methods: {
@@ -51,5 +54,16 @@ export default {
     created() {
         this.notes = getNotes('')
         this.testEvent()
+        this.backgroungImg = getFromStorage('home-bcg')
+    },
+    mounted(){
+        const notesApp = this.$refs.notesApp
+        notesApp.style.backgroundImage = this.background
+
+    },
+    computed: {
+        background(){
+            return `url('../../../../img/${this.backgroungImg}.jpg')`
+        }
     },
 }
