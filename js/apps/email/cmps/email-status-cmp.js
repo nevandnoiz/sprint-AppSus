@@ -1,6 +1,6 @@
 
 export default {
-    props: ['unreadEmails','totalEmails'],
+    props: ['unreadEmails', 'totalEmails'],
     template: `
     <div class="email-status">
     <span :style="unreadPercentageStyle">{{unreadPercentage}}%</span>
@@ -12,11 +12,11 @@ export default {
         }
     },
     methods: {
-  
+
     },
     computed: {
         unreadPercentage() {
-            // return 100;
+            if (!this.totalEmails) return 0
             return Math.floor((this.unreadEmails / this.totalEmails) * 100)
         },
         unreadPercentageStyle() {

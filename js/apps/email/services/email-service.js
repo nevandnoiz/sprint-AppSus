@@ -2,27 +2,19 @@
 import { getFromStorage, saveToStorage, makeId, getCurrentTime } from '../../../services/util-service.js'
 
 export default {
-    getSentEmails,
     getInboxEmails,
+    getSentEmails,
+    getDeletedEmails,
     getEmailById,
-    setEmailIsRead,
-    sendEmail
+    toggleEmailIsRead,
+    sendEmail,
+    deleteEmail,
 }
 
-var gSentEmails = _createSentEmails();
 var gInboxEmails = _createInboxEmails()
+var gSentEmails = _createSentEmails();
 var gIncomingEmails = _createIncomingEmails()
-
-function _createSentEmails() {
-    if (getFromStorage('sent-emails')) return getFromStorage('sent-emails');
-    else {
-        var emails = [
-
-        ];
-        saveToStorage('sent-emails', emails)
-        return emails;
-    }
-}
+var gDeletedEmails = _createDeletedEmails()
 
 function _createInboxEmails() {
     if (getFromStorage('inbox-emails')) return getFromStorage('inbox-emails');
@@ -37,7 +29,7 @@ function _createInboxEmails() {
                 sentAt: Date.now() - 6 * 60 * 60 * 1000
             },
             {
-                id: makeId(), sentBy: 'Suzuki', subject: 'Wassap with jQuery?', body: 'Really?', isRead: true,
+                id: makeId(), sentBy: 'Zuki', subject: 'Wassap with jQuery?', body: 'Really?', isRead: true,
                 sentAt: Date.now() - 14 * 60 * 60 * 1000
             },
             {
@@ -54,6 +46,31 @@ function _createInboxEmails() {
     }
 }
 
+function _createSentEmails() {
+    if (getFromStorage('sent-emails')) return getFromStorage('sent-emails');
+    else {
+        var emails = [
+            {
+                id: makeId(), sentBy: 'Me', subject: 'Hi', body: 'Hey myself', isRead: true,
+                sentAt: Date.now()
+            },
+        ];
+        saveToStorage('sent-emails', emails)
+        return emails;
+    }
+}
+
+function _createDeletedEmails() {
+    if (getFromStorage('deleted-emails')) return getFromStorage('deleted-emails');
+    else {
+        var emails = [
+
+        ]
+        saveToStorage('deleted-emails', emails)
+        return emails;
+    }
+}
+
 var incomingEmailIntrvl = setInterval(() => {
     var email = gIncomingEmails.shift()
     saveToStorage('incoming-emails', gIncomingEmails)
@@ -61,7 +78,7 @@ var incomingEmailIntrvl = setInterval(() => {
     gInboxEmails.push(email);
     _sortEmails()
     saveToStorage('inbox-emails', gInboxEmails)
-}, 1000 * 1000)
+}, 600 * 1000)
 
 
 function getInboxEmails() {
@@ -74,6 +91,11 @@ function getSentEmails() {
     return Promise.resolve(gSentEmails);
 }
 
+function getDeletedEmails() {
+    _sortEmails()
+    return Promise.resolve(gDeletedEmails);
+}
+
 function getEmailById(emailId, currList) {
     if (currList === 'inbox') {
         var email = gInboxEmails.find(function (email) {
@@ -83,15 +105,19 @@ function getEmailById(emailId, currList) {
         var email = gSentEmails.find(function (email) {
             return emailId === email.id
         })
+    } else if (currList === 'deleted') {
+        var email = gDeletedEmails.find(function (email) {
+            return emailId === email.id
+        })
     }
     return Promise.resolve(email)
 }
 
-function setEmailIsRead(emailId) {
+function toggleEmailIsRead(emailId) {
     var idx = gInboxEmails.findIndex(function (email) {
         return emailId === email.id
     })
-    gInboxEmails[idx].isRead = true;
+    gInboxEmails[idx].isRead = !gInboxEmails[idx].isRead;
     saveToStorage('inbox-emails', gInboxEmails)
     return Promise.resolve()
 }
@@ -103,6 +129,29 @@ function sendEmail(email) {
     gSentEmails.push(newEmail);
     _sortEmails()
     saveToStorage('sent-emails', gSentEmails)
+    return Promise.resolve()
+}
+
+function deleteEmail(emailId, currList) {
+    if (currList === 'inbox') {
+        var idx = gInboxEmails.findIndex(function (email) {
+            return emailId === email.id
+        })
+        var removed = gInboxEmails.splice(idx, 1)[0]
+        removed.isRead = true;
+        gDeletedEmails.push(removed)
+        _sortEmails()
+        saveToStorage('inbox-emails', gInboxEmails)
+    } else if (currList === 'sent') {
+        var idx = gSentEmails.findIndex(function (email) {
+            return emailId === email.id
+        })
+        var removed = gSentEmails.splice(idx, 1)[0]
+        gDeletedEmails.push(removed)
+        _sortEmails()
+        saveToStorage('sent-emails', gSentEmails)
+    }
+    saveToStorage('deleted-emails', gDeletedEmails)
     return Promise.resolve()
 }
 
@@ -161,6 +210,8 @@ function _createIncomingEmails() {
                 "body": "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius."
             },
             {
+                "id": makeId(),
+                "isRead": false,
                 "sentBy": "Molly",
                 "subject": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue.",
                 "body": "Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem."

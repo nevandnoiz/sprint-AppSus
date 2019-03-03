@@ -1,13 +1,18 @@
+import emailControls from '../cmps/email-controls-cmp.js';
+
 export default {
-    props: ['email'],
+    props: ['email', 'currList'],
+    components:{
+        emailControls
+    },
     template: `
-   <div class="email-preview" :class="{read: email.isRead}" @mouseenter="toggleIsHovered" @mouseleave="toggleIsHovered" >
-   <i :class="emailIcon"></i>
-       <span class="preview-sent-by">{{email.sentBy}}</span>
+   <div class="email-preview" :class="{read: email.isRead}" @mouseenter="toggleIsHovered" @mouseleave="toggleIsHovered"> 
+    <span class="preview-sent-by"><i :class="emailIcon"></i> {{email.sentBy}}</span>
         <span class="preview-subject">{{email.subject}} -</span>
         <span class="preview-body">{{email.body}}</span>
         <span v-if="!isHovered" class="preview-sent-at">{{sentAtFormatted}}</span>
-        <span v-if="isHovered" class="preview-remove-email"><i class="fas fa-trash"></i></span>
+        <email-controls v-if="isHovered && !isDeleted" :email="email" :currList="currList"
+    @delete="$emit('delete',email.id)" @toggleRead="$emit('toggleRead',email.id)"></email-controls>
     </div>
     `,
     data() {
@@ -16,7 +21,7 @@ export default {
         }
     },
     methods: {
-        timestampInTime() {
+        timestampInHours() {
             var date = new Date(this.email.sentAt)
             var hours = date.getHours()
             var mins = date.getMinutes()
@@ -45,9 +50,9 @@ export default {
             return `${day}/${month}/${year}`
         },
         toggleIsHovered() {
+            if (this.currList==='deleted') return
             this.isHovered = !this.isHovered
-            // console.log('noo')
-        }
+        },
     },
 
     created() {
@@ -56,7 +61,7 @@ export default {
     computed: {
         sentAtFormatted() {
             var currTimestamp = Date.now()
-            if (currTimestamp - this.email.sentAt < 24 * 60 * 60 * 1000) return this.timestampInTime()
+            if (currTimestamp - this.email.sentAt < 24 * 60 * 60 * 1000) return this.timestampInHours()
             else {
                 var currDate = new Date(currTimestamp)
                 var emailDate = new Date(this.email.sentAt)
@@ -68,5 +73,11 @@ export default {
             if (this.email.isRead) return 'far fa-envelope-open'
             else return 'far fa-envelope'
         },
+        isDeleted(){
+            if (this.currList==='deleted') return true
+        },
+        isSent(){
+            if (this.currList==='sent') return true
+        }
     }
 }

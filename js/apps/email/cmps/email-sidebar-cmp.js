@@ -11,7 +11,7 @@ export default {
         <i class="fas fa-share-square"></i> 
           Sent
         </router-link>
-        <router-link :to="'/email/deleted'">
+        <router-link @click.native="$emit('changeList','deleted')" :to="'/email/deleted'">
         <i class="fas fa-trash-alt"></i> Deleted
         </router-link>
     </div>

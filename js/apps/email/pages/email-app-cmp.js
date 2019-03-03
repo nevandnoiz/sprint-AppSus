@@ -3,6 +3,7 @@ import emailFilter from '../cmps/email-filter-cmp.js';
 import emailStatus from '../cmps/email-status-cmp.js';
 import emailCompose from '../cmps/email-compose-cmp.js';
 import emailSidebar from '../cmps/email-sidebar-cmp.js';
+import { eventBus } from '../../../main.js';
 
 export default {
     components: {
@@ -12,42 +13,62 @@ export default {
         emailCompose
     },
     template: `   
-    <div class="email-app" v-if="inboxEmails && sentEmails">
+    <div class="email-app" v-if="inboxEmails">
         <email-filter @filtered="setFilter"></email-filter>
-        <div class="app-side-bar">
+        <div class="mobile-nav"><button @click="openSidebar=!openSidebar">&#9776;</button></div>
+        <div class="app-side-bar" :class="{'open-side-bar': openSidebar}">
             <button @click="isComposing=!isComposing"><i class="fas fa-plus"></i> Compose</button>
-            <email-sidebar @changeList="updateCurrEmailsList" :totalEmails="numOfEmails" 
-            :unreadEmails="unreadEmails"></email-sidebar>
+            <email-sidebar :totalEmails="numOfEmails" @changeList="changeList" 
+           :unreadEmails="unreadEmails"></email-sidebar>
             <email-status :totalEmails="numOfEmails" :unreadEmails="unreadEmails"></email-status>
         </div>
-        <email-compose @sent="addEmail" v-if="isComposing"></email-compose>
-        <router-view class="email-in-app" @read="setIsRead" :emails="emailsToShow" :currList="currEmailsList"></router-view>
+        <email-compose v-if="isComposing" @sent="addEmail" @closeCompose="closeCompose"></email-compose>
+        <router-view class="email-in-app" @emailRead="setEmailRead" @delete="deleteEmail" @toggleRead="toggleIsRead" @mobileCompose="isComposing=!isComposing" :emails="emailsToShow" :currList="emailsList"></router-view>
     </div>
 `,
     data() {
         return {
             inboxEmails: null,
             sentEmails: null,
-            currEmailsList: 'inbox',
+            deletedEmails: null,
+            emailsList: null,
             filterBy: null,
-            isComposing: false
+            isComposing: false,
+            openSidebar: false
         }
     },
     methods: {
-        updateCurrEmailsList(list) {
-            console.log(list)
-            this.currEmailsList = list;
+        changeList() {
+            this.findCurrentListByRoute();
+            if (this.openSidebar) this.openSidebar=false;
+        },
+        findCurrentListByRoute() {
+            if (this.$router.currentRoute.path.includes('inbox')) return this.emailsList = 'inbox'
+            else if (this.$router.currentRoute.path.includes('sent')) return this.emailsList = 'sent'
+            else if (this.$router.currentRoute.path.includes('deleted')) return this.emailsList = 'deleted'
         },
         setFilter(filter) {
             this.filterBy = filter;
         },
-        setIsRead(emailId) {
-            if (this.currEmailsList === 'sent') return;
-            setTimeout(emailService.setEmailIsRead, 2000, emailId);
+        setEmailRead(emailId) {
+            setTimeout(emailService.toggleEmailIsRead, 1500, emailId);
+        },
+        toggleIsRead(emailId) {
+            emailService.toggleEmailIsRead(emailId)
         },
         addEmail(email) {
-            this.isComposing = false
+            this.closeCompose()
             setTimeout(emailService.sendEmail, 2000, email);
+        },
+        closeCompose() {
+            this.isComposing = false
+        },
+        deleteEmail(emailId) {
+            setTimeout(emailService.deleteEmail, 400, emailId, this.emailsList);
+        },
+        replyEmail(email) {
+            this.isComposing = true;
+            setTimeout(() => { eventBus.$emit('composeReply', email) }, 0)
         },
         countUnreadEmails() {
             var count = 0;
@@ -55,12 +76,14 @@ export default {
                 if (!email.isRead) count++
             })
             return count;
-        }
+        },
     },
     computed: {
         emailsToShow() {
-            if (this.currEmailsList === 'inbox') var filteredEmails = this.inboxEmails;
-            else if (this.currEmailsList === 'sent') var filteredEmails = this.sentEmails;
+            if (this.emailsList === 'inbox') var filteredEmails = this.inboxEmails;
+            else if (this.emailsList === 'sent') var filteredEmails = this.sentEmails;
+            else if (this.emailsList === 'deleted') var filteredEmails = this.deletedEmails;
+
             if (this.filterBy.byName !== '') {
                 filteredEmails = filteredEmails.filter(email => {
                     return email.subject.toLowerCase().includes(this.filterBy.byName.toLowerCase()) ||
@@ -87,9 +110,15 @@ export default {
             .then(emails => this.inboxEmails = emails)
         emailService.getSentEmails()
             .then(emails => this.sentEmails = emails)
+        emailService.getDeletedEmails()
+            .then(emails => this.deletedEmails = emails)
         this.filterBy = {
             byName: '',
             selectedFilter: 'All'
-        }
+        },
+            eventBus.$on('reply', this.replyEmail)
+    },
+    mounted() {
+        this.findCurrentListByRoute()
     }
 }
