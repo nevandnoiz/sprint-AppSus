@@ -71,6 +71,7 @@
 }
 
 .notes-board {
+    margin-bottom: 50px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     justify-items: center;
@@ -184,7 +185,9 @@ input.color-input {
     border: 1px solid gray;
     border-radius: 50%;
     cursor: pointer;
-    outline: 0
+    outline: 0;
+    /* margin-right: 10px; */
+    /* margin-bottom: 5px */
 }
 .opt-btns {
     display: flex;
