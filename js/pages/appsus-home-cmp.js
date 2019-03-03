@@ -3,7 +3,7 @@ import homeService from '../services/home-service.js';
 
 export default {
     template: `   
-    <div class="home-page" ref=home>
+    <div class="home-page" ref="home">
         
         <nav-bar></nav-bar>
     <div class="change-background">
