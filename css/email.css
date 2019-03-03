@@ -462,6 +462,18 @@
     .email-details{
         grid-area: 2/1/2/1;
         padding:0 8px;
+        z-index:1;
+        background-color:white;
+    }
+    .email-details .preview-controls-email{
+        z-index:1;
+        background-color:white;
+    }
+    .email-details .details-sent-by{
+       padding: 0 8px;
+    }
+    .email-details .details-subject{
+       padding: 0 8px;
     }
     .email-filter{
         margin:10px auto 5px auto;
@@ -494,13 +506,5 @@
      }
      .email-compose .send-email {
         display: none;
-    }
-    .email-details {
-        z-index:1;
-        background-color:white;
-    }
-    .email-details .preview-controls-email{
-        z-index:1;
-        background-color:white;
     }
 }
