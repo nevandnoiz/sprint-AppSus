@@ -77,6 +77,9 @@ export default {
             })
             return count;
         },
+        test(notes){
+            console.log(notes)
+        }
     },
     computed: {
         emailsToShow() {
@@ -117,6 +120,7 @@ export default {
             selectedFilter: 'All'
         },
             eventBus.$on('reply', this.replyEmail)
+            eventBus.$on('test', this.test)
     },
     mounted() {
         this.findCurrentListByRoute()
