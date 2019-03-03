@@ -481,7 +481,8 @@
     }
     .mobile-nav{
         display:flex;
-        min-width:200px
+        min-width:200px;
+        position: sticky;
     }
     .mobile-compose{
         display:block;
