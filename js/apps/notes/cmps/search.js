@@ -17,7 +17,7 @@ export default {
     },
     watch: {
         searchInput: function (val) {
-            this.$emit('test', val)
+            this.$emit('search', val)
         }
     }
 }

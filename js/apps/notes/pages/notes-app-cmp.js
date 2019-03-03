@@ -10,7 +10,7 @@ export default {
     <section class=notes-app>
         <new-note></new-note>
         <new-todo></new-todo>
-        <search @test=test></search>  
+        <search @search=search></search>  
         <notes-board :notes="notes"></notes-board>
     </section>
 `,
@@ -22,7 +22,7 @@ export default {
         }
     },
     methods: {
-        test(val){
+        search(val){
             this.notes = getNotes(val)
         }
     },
