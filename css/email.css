@@ -530,6 +530,7 @@
         font-size: 18px;
     }
     .email-compose textarea {
+        padding: 16px 14px;
         font-size: 18px;
     }
     .email-compose .compose-nav{
