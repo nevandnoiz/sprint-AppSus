@@ -15,12 +15,13 @@ export default {
     ,
     data() {
         return {
-            
+
         }
     },
     methods: {
     },
     created() {
     },
-    components: { textComp, videoCmp }
+    components: { textComp, videoCmp },
+    
 }

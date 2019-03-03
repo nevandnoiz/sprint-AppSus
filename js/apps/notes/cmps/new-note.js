@@ -7,7 +7,7 @@ export default {
         <div class="text-note">
             <input v-if="edit" type="text" v-model="newNote.text.headline" ref="headline"  @blur="noteBlur" placeholder="Title" :style="{ background: newNote.color}"> 
             <textarea cols="30" rows="5" v-model="newNote.text.body" @focus="noteFocused" @blur="noteBlur" ref="body" :placeholder="textareaPlaceholder" :style="{ background: newNote.color}"></textarea>
-            <op-btns :edit="edit" @addNote="addNote" :newNote="newNote" @colorFocus="btnsFocus" @colorblur="btnBlur" @pinNote="pinNote"></op-btns>
+            <op-btns  v-show="edit" @addNote="addNote" :newNote="newNote" @colorFocus="btnsFocus" @colorblur="btnBlur" @pinNote="pinNote"></op-btns>
         </div>
         <div class="upload-btns" v-if="!edit">
         <i :class="videoClass" @click="uploadVideo"></i>
@@ -25,8 +25,8 @@ export default {
                 date: '',
                 type: 'textComp',
                 text: {
-                    headline: null,
-                    body: null
+                    headline: '',
+                    body: ''
                 },
                 tags: null,
                 color: '#ffffff',

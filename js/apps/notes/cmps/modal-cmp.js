@@ -2,11 +2,11 @@ export default {
     name: 'modal',
     props: ['note'],
     template: `
-         <div id="myModal" class="modal">
-            <div class="modal-content" :style="{ background: note.color}">
+         <div id="myModal" class="modal" @click.nativ="$emit('closeModal')">
+            <div class="modal-content" :style="{ background: note.color}"  @click.stop=''>
                 <span class="close" @click="$emit('closeModal')">&times;</span>
-                <input type="text"  v-model:value="headline" placeholder="title" :style="{ background: note.color}">
-                <textarea v-model:value="body" placeholder="body" :style="{ background: note.color}" ref="body"></textarea>
+                <input type="text"  v-model:value="headline" placeholder="title" :style="{ background: note.color}" @click.stop=''>
+                <textarea v-model:value="body" placeholder="body" :style="{ background: note.color}"   @click.stop='' ref="body"></textarea>
             </div>
         </div>
 
@@ -15,7 +15,6 @@ export default {
         return {
             body: '',
             headline: '',
-            color
         }
     },
     created(){

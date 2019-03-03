@@ -3,10 +3,6 @@ export default {
     template: `   
         <div class="search">
             <input type="text" v-model:value="searchInput" placeholder="search">
-            <!-- <select>
-                <option value="">Title</option>
-                <option value="">Body</option>
-            </select> -->
         </div>
         `
     ,

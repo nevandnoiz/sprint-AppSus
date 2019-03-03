@@ -1,7 +1,7 @@
 export default {
-    props: ['edit', 'newNote'],
+    props: ['newNote'],
     template: `   
-        <div class="opt-btns" v-show="edit" @click.stop=''>
+        <div class="opt-btns" @click.stop=''>
             <button  @click="$emit('addNote')">save note</button>
             <input class="color-input" value="#ffffff" ref="color" @focus="$emit('colorFocus')"  @blur="$emit('colorblur')"/>
             <i class="fas fa-map-pin" @click="$emit('pinNote')" :style="{ color: pinColor}"></i>

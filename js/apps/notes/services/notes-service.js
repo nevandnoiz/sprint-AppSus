@@ -12,7 +12,7 @@ function getNotesFromStorage(key) {
 
 export function getNotes(val) {
     if (!val) return gNotes
-    return gNotes.filter(note => note.text.body.includes(val))
+    return gNotes.filter(note => note.text.body.includes(val) || note.text.headline.includes(val))
 }
 
 export function saveNote(note) {
