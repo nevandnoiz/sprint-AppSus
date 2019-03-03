@@ -69,6 +69,10 @@ export default {
             this.isComposing = true;
             setTimeout(() => { eventBus.$emit('composeReply', email) }, 0)
         },
+        noteToMessage(note) {
+            this.isComposing = true;
+            setTimeout(() => { eventBus.$emit('composeNote', note) }, 0)
+        },
         countUnreadEmails() {
             var count = 0;
             this.inboxEmails.forEach(email => {
@@ -120,6 +124,7 @@ export default {
         },
             eventBus.$on('reply', this.replyEmail)
         eventBus.$on('toggleSidebar', this.toggleSidebar)
+        eventBus.$on('noteToMessage', this.noteToMessage)
     },
     mounted() {
         this.findCurrentListByRoute()

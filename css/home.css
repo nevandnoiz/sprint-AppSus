@@ -80,12 +80,15 @@ footer{
     opacity:0;
     border:none;
     background:none;
-    font-size: 40px;
     color:rgb(189, 189, 189);
     cursor: pointer;
-    padding:30px;
     transition: 0.3s;
     outline: 0;
+}
+
+.change-background-btn i{
+    padding:10px;
+    font-size: 40px;
 }
 
 .change-background-btn:hover{

@@ -53,6 +53,11 @@ export default {
             this.emailData.subject = 'Re: ' + email.subject
             this.replyBody = email.body;
         },
+        sendNote(note) {
+            if (note.text.headLine) this.emailData.subject = note.text.headLine
+            else this.emailData.subject = note.text.headLine
+            this.this.emailData.body = note.text.body
+        },
         // editReplyBody() {
         //     this.isEditReplyBody = true
         // }
@@ -64,5 +69,6 @@ export default {
     },
     created() {
         eventBus.$on('composeReply', this.replyEmail)
+        eventBus.$on('composeNote', this.sendNote)
     }
 }
