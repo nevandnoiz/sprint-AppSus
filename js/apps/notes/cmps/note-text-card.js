@@ -13,7 +13,7 @@ export default {
             </div>
                <p @click="displayModal = true">{{note.text.body}}</p>
                 <transition name="fade">
-                <card-btns v-show="showBtns" :note="note" :color="color" @deleteNote="deleteNote(note.id)" @addPin="addPin(note)" @changeColor="changeColor">
+                <card-btns v-show="showBtns" :note="note" :color="color" @sendToMail="sendToMail(note)" @deleteNote="deleteNote(note.id)" @addPin="addPin(note)" @changeColor="changeColor">
                 </card-btns>
                 </transition>
         </div>
@@ -57,6 +57,9 @@ export default {
         },
         changeColor(color){
             this.color=color
+        },
+        sendToMail(note){
+            console.log(note);
         }
 
     },

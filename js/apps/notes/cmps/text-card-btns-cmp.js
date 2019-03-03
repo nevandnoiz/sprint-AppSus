@@ -6,6 +6,7 @@ export default {
         <div class="btns">
             <i class="fas fa-trash"  @click.stop="$emit('deleteNote')"></i>
             <i class="fas fa-map-pin" v-if="!note.order" @click.stop="$emit('addPin')"></i>
+            <i class="fas fa-envelope" @click="$emit('sendToMail', note)"></i>
             <input @click.stop = "" class="color-input" :value="color" ref="color"/>
             <!-- <button @click="showReminder= true"></button> -->
             

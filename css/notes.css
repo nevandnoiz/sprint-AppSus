@@ -176,6 +176,13 @@
     cursor: pointer;
 }
 
+.fa-envelope {
+    cursor: pointer;
+    font-size: 22px;
+    color: gray;
+    cursor: pointer;
+}
+
 input.color-input {
     background-color: rgb(170, 204, 136);
     color: rgb(34, 34, 34);
