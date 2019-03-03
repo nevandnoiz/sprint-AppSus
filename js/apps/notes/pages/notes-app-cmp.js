@@ -3,6 +3,7 @@ import newTodo from '../cmps/new-todo.js';
 import notesBoard from '../cmps/notes-board.js';
 import search from '../cmps/search.js';
 import { getNotes } from '../services/notes-service.js'
+import { eventBus } from '../../../main.js';
 
 
 export default {
@@ -24,6 +25,9 @@ export default {
     methods: {
         test(val){
             this.notes = getNotes(val)
+        },
+        testEvent(){
+            eventBus.$emit('test', this.notes)
         }
     },
     computed: {
@@ -40,6 +44,6 @@ export default {
     },
     created() {
         this.notes = getNotes('')
-        eventBus.$emit('test', this.notes)
+        this.testEvent()
     },
 }

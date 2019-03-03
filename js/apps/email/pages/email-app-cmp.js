@@ -22,7 +22,7 @@ export default {
            :unreadEmails="unreadEmails"></email-sidebar>
             <email-status :totalEmails="numOfEmails" :unreadEmails="unreadEmails"></email-status>
         </div>
-        <email-compose v-if="isComposing" @sent="addEmail" @closeCompose="closeCompose"></email-compose>
+            <email-compose v-if="isComposing" @sent="addEmail" @closeCompose="closeCompose"></email-compose>
         <router-view class="email-in-app" @emailRead="setEmailRead" @delete="deleteEmail" @toggleRead="toggleIsRead" @mobileCompose="isComposing=!isComposing" :emails="emailsToShow" :currList="emailsList"></router-view>
     </div>
 `,
@@ -78,7 +78,8 @@ export default {
             return count;
         },
         test(notes){
-            console.log(notes)
+            console.log('dsfsdf')
+            // console.log(notes)
         }
     },
     computed: {
@@ -120,7 +121,6 @@ export default {
             selectedFilter: 'All'
         },
             eventBus.$on('reply', this.replyEmail)
-            eventBus.$on('test', this.test)
     },
     mounted() {
         this.findCurrentListByRoute()
