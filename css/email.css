@@ -9,6 +9,7 @@
 
 .email-filter i{
   color: darkslategray;
+  align-self: center;
   margin-right:0 5px;
   padding:10px;
   border-radius:50%;
