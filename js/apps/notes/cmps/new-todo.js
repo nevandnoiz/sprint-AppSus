@@ -1,20 +1,20 @@
-import { saveNote } from '../services/notes-service.js'
+import { saveTodo } from '../services/notes-service.js'
 import opBtns from '../cmps/options-cmp.js'
 
 
 export default {
     template: `   
-    <div  :class="['createMode', 'new-note']" :style="{ background: newNote.color}">
+    <div  class="createMode new-note todos" :style="{ background: newNote.color}">
         <div class="text-note">
-            <input type="text" v-model="newNote.data.headline" ref="headline"  @blur="noteBlur" placeholder="Title" :style="{ background: newNote.color}"> 
+            <input type="text" v-model="newNote.data.headline" ref="headline"   placeholder="Title" :style="{ background: newNote.color}"> 
             <section class="todos">
-                <div v-for="(n,i) in numOfTodos">
-                    <input type="checkbox" @click.stop=''>
-                    saw {{n}}
-                    <input cols="30" rows="5"  v-model="newNote.data.todos[i].text" @focus="noteFocused" @keyup.once="addLine" @blur="noteBlur"  ref="body" placeholder="Start typing a task" :style="{ background: newNote.color}">{{n}}</input>
+                <div v-for="(todo,i) in newNote.data.todos">
+                    <input type="checkbox" @click.stop='' v-model="newNote.data.todos[i].done">
+                    <input cols="30" rows="5"  v-model="newNote.data.todos[i].text" @focus="noteFocused" @keyup="addLine(i)" ref="body" placeholder="Start typing a task" :style="{ background: newNote.color}"></input>
+                    <hr>
                 </div>
             </section>
-            <op-btns @addNote="addNote" :newNote="newNote" @colorFocus="btnsFocus" @colorblur="btnBlur" @pinNote="pinNote"></op-btns>
+            <op-btns @addNote="addNote" :newNote="newNote"  @pinNote="pinNote"></op-btns>
         </div>
     </div>
     </div>
@@ -25,29 +25,22 @@ export default {
             newNote: {
                 id: '',
                 date: '',
-                type: 'textComp',
+                type: 'todo',
                 data: {
                     headline: '',
                     todos: [
                         {
-                            num: this.numOfTodos,
+                            num: 1,
                             done: false,
                             text: ''
                         },
-                        {
-                            num: this.numOfTodos,
-                            done: false,
-                            text: ''
-                        },
-                    ] 
+                    ]
                 },
                 tags: null,
                 color: '#ffffff',
                 reminder: null,
                 order: false
             },
-            edit: false,
-            optedit: false,
             numOfTodos: 1
         }
     },
@@ -58,51 +51,42 @@ export default {
     },
     methods: {
         addNote() {
-            saveNote(this.newNote)
+            saveTodo(this.newNote)
             this.newNote = {
                 id: '',
                 date: '',
-                type: 'textComp',
-                text: {
+                type: 'todo',
+                data: {
                     headline: '',
-                    body: ''
+                    todos: [
+                        {
+                            num: 1,
+                            done: false,
+                            text: ''
+                        },
+                    ]
                 },
                 tags: null,
                 color: '#ffffff',
                 reminder: null,
-                order: 0
+                order: false
             }
+            this.numOfTodos = 1
         },
         noteFocused() {
-            if (!this.newNote.date) this.newNote.date = Date.now();
-            if (this.video) return;
-            this.edit = true;
-            const body = this.$refs.body;
-            // setTimeout(() => body.focus(), 0);
-
-        },
-        noteBlur() {
-            // setTimeout(() => {
-            //     if (this.video) return
-            //     if (this.optedit) return
-
-            //     setTimeout(() => {
-            //         this.edit = false;
-            //         this.addNote()
-            //         this.newNote.color = '#ffffff'
-            //     }, 0)
-            // }, 100)
+            if (!this.newNote.date) this.newNote.date = Date.now()
         },
         pinNote() {
-            this.btnsFocus()
             this.newNote.order = !this.newNote.order
-            this.btnBlur()
         },
-        btnsFocus(){},
-        btnBlur(){},
-        addLine(){
-            console.log('addline');
-            this.numOfTodos++
+
+        addLine(i) {
+            if (this.newNote.data.todos[i + 1]) return
+            this.newNote.data.todos.push({
+                num: this.numOfTodos++,
+                done: false,
+                text: ''
+            })
         }
     },
 }

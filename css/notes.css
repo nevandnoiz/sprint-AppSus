@@ -256,3 +256,24 @@ input.color-input {
     cursor: pointer;
     width: 25px
   }
+
+  .todos > div > input {
+      border: 0;
+  }
+
+  .new-note.todos{
+      height: 100%;
+  }
+
+  .text-note{
+      width: inherit;
+  }
+
+  .todos-section{
+display: flex;
+flex-direction: column
+  }
+
+  .todos-section:last-child {
+      display: none
+  } 

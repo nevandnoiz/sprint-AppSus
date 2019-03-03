@@ -33,6 +33,30 @@ export function saveNote(note) {
     saveToStorage(storageKey, gNotes);
 }
 
+export function saveTodo(note) {
+    gNotes.unshift({
+        id: makeId(),
+        date: note.date,
+        type: note.type,
+        data: {
+            headline: note.data.headline,
+            todos: []
+        },
+        tags: note.tags,
+        color: note.color,
+        reminder: note.reminder,
+        order: note.order
+    })
+    for (let i = 0; i < note.data.todos.length; i++) {
+        gNotes[0].data.todos.push({
+            num: note.data.todos[i].num,
+            done: note.data.todos[i].done,
+            text: note.data.todos[i].text,
+        })
+    }
+    saveToStorage(storageKey, gNotes)
+}
+
 
 export function deleteNote(noteid) {
     const noteToDelet = getNoteIdx(noteid)
@@ -64,5 +88,10 @@ export function addPin(note) {
 export function updateNote(note, body, headline) {
     note.text.body = body;
     note.text.headline = headline
+    saveToStorage(storageKey, gNotes);
+}
+
+export function updateTodoItem(note, i){
+    note.data.todos[i].done = !note.data.todos[i].done;
     saveToStorage(storageKey, gNotes);
 }

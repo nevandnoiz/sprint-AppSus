@@ -1,6 +1,7 @@
 
 import textComp from '../cmps/note-text-card.js'
 import videoCmp from '../cmps/note-video-card.js'
+import todo from '../cmps/note-todo-card.js'
 
 
 export default {
@@ -21,6 +22,6 @@ export default {
     },
     created() {
     },
-    components: { textComp, videoCmp },
+    components: { textComp, videoCmp, todo },
     
 }
