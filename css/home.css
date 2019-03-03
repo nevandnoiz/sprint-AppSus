@@ -42,11 +42,14 @@ footer{
 }
 
 @media (max-width:610px){
-    .nav-bar{
-        height: 75px;
+    .home-page{
+        grid-template: 75px 1fr 75px/1fr;
     }
-    .footer{
-        height: 75px;
+    .nav-bar{
+        height:75px;
+    }
+    footer{
+        height:75px;
     }
 }
 
