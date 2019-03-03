@@ -1,9 +1,12 @@
+import navBar from '../cmps/nav-bar.js';
+
 export default {
     template: `   
     <div class="home-page">
+        
+        <nav-bar></nav-bar>
+
         <h1>Welcome to AppSus!</h1>
-            <router-link exact to="/notes">Go To Notes</router-link>
-            <router-link exact to="/email">Go To Mail</router-link>
     </div>
 `,
     data() {
@@ -13,6 +16,9 @@ export default {
     },
     methods: {
 
+    },
+    components: {
+        navBar
     },
     computed: {
 

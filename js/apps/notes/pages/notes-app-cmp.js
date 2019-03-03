@@ -4,16 +4,20 @@ import notesBoard from '../cmps/notes-board.js';
 import search from '../cmps/search.js';
 import { getNotes } from '../services/notes-service.js'
 import { eventBus } from '../../../main.js';
-
+import navBar from '../../../cmps/nav-bar.js';
 
 export default {
     template: `   
-    <section class=notes-app>
-        <new-note></new-note>
-        <new-todo></new-todo>
-        <search @search=search></search>  
-        <notes-board :notes="notes"></notes-board>
-    </section>
+    <div>
+
+        <nav-bar></nav-bar>
+        <section class=notes-app>
+            <new-note></new-note>
+            <new-todo></new-todo>
+            <search @search=search></search>  
+            <notes-board :notes="notes"></notes-board>
+        </section>
+    </div>
 `,
     data() {
         return {
@@ -37,7 +41,8 @@ export default {
         newNote,
         notesBoard,
         search,
-        newTodo
+        newTodo,
+        navBar
     },
     watch:{
         searchVal: (val) => this.notes = getNotes(val)
