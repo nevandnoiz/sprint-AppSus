@@ -397,13 +397,13 @@
     position:fixed;
     bottom: -100px;
     right: 20px;
-    font-size: 26px;
+    font-size: 22px;
     color: white;
     background-color: rgb(109, 162, 227);
     border-radius: 100%;
     border:none;
     box-shadow:0 0 3px blue;
-    padding: 20px;
+    padding: 16px 18px;
     transition: linear 0.3s;
     cursor: pointer;
 }
