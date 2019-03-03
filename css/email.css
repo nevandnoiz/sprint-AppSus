@@ -527,7 +527,10 @@
 
     .email-compose input {
         padding: 16px 14px;
-        font-size: 20px;
+        font-size: 18px;
+    }
+    .email-compose textarea {
+        font-size: 18px;
     }
     .email-compose .compose-nav{
        display: none;
