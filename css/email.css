@@ -107,7 +107,7 @@
     right: 6%;
     box-shadow: 0 0 2px black;
     border-radius:4px;
-    z-index:1;
+    z-index:2;
 }
 
 .email-compose .compose-nav{
@@ -460,7 +460,7 @@
         padding: 14px;
     }
     .email-details{
-        grid-area: 3/1/3/1;
+        grid-area: 2/1/2/1;
         padding:0 8px;
     }
     .email-filter{
@@ -495,5 +495,13 @@
      }
      .email-compose .send-email {
         display: none;
+    }
+    .email-details {
+        z-index:1;
+        background-color:white;
+    }
+    .email-details .preview-controls-email{
+        z-index:1;
+        background-color:white;
     }
 }
