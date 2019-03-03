@@ -3,8 +3,6 @@ import appSusHome from './pages/appsus-home-cmp.js';
 import emailApp from './apps/email/pages/email-app-cmp.js';
 import emailDetails from './apps/email/pages/email-details-cmp.js';
 import emailList from './apps/email/cmps/email-list-cmp.js';
-// import emailSent from './apps/email/cmps/email-sent-cmp.js';
-// import emailDeleted from './apps/email/cmps/email-deleted-cmp.js';
 
 
 import notesApp from './apps/notes/pages/notes-app-cmp.js';

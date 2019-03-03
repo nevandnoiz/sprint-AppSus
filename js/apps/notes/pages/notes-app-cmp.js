@@ -5,7 +5,7 @@ import search from '../cmps/search.js';
 import { getNotes } from '../services/notes-service.js'
 import { eventBus } from '../../../main.js';
 import { getFromStorage } from '../../../services/util-service.js';
-import navBar from '../../../cmps/nav-bar.js';
+import navBar from '../../../cmps/nav-bar-cmp.js';
 
 
 export default {

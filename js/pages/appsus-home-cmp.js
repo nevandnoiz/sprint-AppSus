@@ -1,16 +1,16 @@
-import navBar from '../cmps/nav-bar.js';
+import navBar from '../cmps/nav-bar-cmp.js';
+import footerCmp from '../cmps/footer-cmp.js';
 import homeService from '../services/home-service.js';
 
 export default {
     template: `   
     <div class="home-page" ref="home">
-        
         <nav-bar></nav-bar>
     <div class="change-background">
         <button class="change-background-btn" @click="switchBackground('left')"><i class="fas fa-arrow-left"></i></button>
         <button class="change-background-btn" @click="switchBackground('right')"><i class="fas fa-arrow-right"></i></button>
     </div>
-        
+        <footer-cmp></footer-cmp>
     </div>
 `,
     data() {
@@ -23,7 +23,6 @@ export default {
             if (direction === 'right') {
                 this.currBackground++
                 if (this.currBackground === 14) this.currBackground = 1
-                console.log(this.currBackground);
             }
             else if (direction === 'left') {
                 this.currBackground--
@@ -42,7 +41,8 @@ export default {
         }
     },
     components: {
-        navBar
+        navBar,
+        footerCmp
     },
     computed: {
         background(){
