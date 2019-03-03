@@ -15,6 +15,7 @@ var gInboxEmails = _createInboxEmails()
 var gSentEmails = _createSentEmails();
 var gIncomingEmails = _createIncomingEmails()
 var gDeletedEmails = _createDeletedEmails()
+_sortEmails();
 
 function _createInboxEmails() {
     if (getFromStorage('inbox-emails')) return getFromStorage('inbox-emails');
@@ -158,6 +159,7 @@ function deleteEmail(emailId, currList) {
 function _sortEmails() {
     gInboxEmails.sort((a, b) => { return a.sentAt < b.sentAt })
     gSentEmails.sort((a, b) => { return a.sentAt < b.sentAt })
+    gDeletedEmails.sort((a, b) => { return a.sentAt < b.sentAt })
 }
 
 
