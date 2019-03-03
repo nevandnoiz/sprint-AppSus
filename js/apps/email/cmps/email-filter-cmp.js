@@ -16,7 +16,7 @@ export default {
             filterBy: {
                 byName: '',
                 selectedFilter : 'All',
-            }
+            },
         }
     },
     methods: {

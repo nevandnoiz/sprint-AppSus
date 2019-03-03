@@ -14,8 +14,15 @@ export default {
     },
     template: `   
     <div class="email-app" v-if="inboxEmails">
-        <email-filter @filtered="setFilter"></email-filter>
+        <div class="email-nav">
+            <div class="nav-routes">
+            <router-link exact to="/">HOME</router-link>
+            <router-link exact to="/notes">NOTES</router-link>
+            </div>
+            <email-filter @filtered="setFilter"></email-filter>
+        </div>
         <div class="mobile-nav">
+            <email-filter @filtered="setFilter"></email-filter>
             <button @click="openSidebar=!openSidebar">&#9776;</button>
         </div>
         <div class="app-side-bar" :class="{'open-side-bar': openSidebar}">
