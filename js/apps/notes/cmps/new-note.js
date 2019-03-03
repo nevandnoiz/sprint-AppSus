@@ -10,6 +10,7 @@ export default {
             <op-btns  v-show="edit" @addNote="addNote" :newNote="newNote" @colorFocus="btnsFocus" @colorblur="btnBlur" @pinNote="pinNote"></op-btns>
         </div>
         <div class="upload-btns" v-if="!edit">
+        <i class="fas fa-list" v-if="!video" @click="$emit('displayTodo')"></i>
         <i :class="videoClass" @click="uploadVideo"></i>
     </div>
     

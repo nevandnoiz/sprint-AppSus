@@ -10,7 +10,7 @@
 
 .container-notes{
     justify-content: center;
-    width: 750px;
+    width: 80vw;
 }
 
 .new-note{
@@ -18,13 +18,13 @@
     margin-bottom: 50px;
     display: flex;
     height: 50px;
-    width: 500px;
+    width: 60vw;
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
     border: 0;
     border-radius: 7px;
     justify-content: space-between;
     transition: .3s;
-}    
+}   
 
 .new-note input{
     font-family: 'Open Sans', sans-serif;
@@ -77,6 +77,16 @@
     border:0;
     margin: 5px
 }
+.todo-title {
+    border:0;
+    margin: 5px;
+    flex-grow: 1;
+}
+
+.text-note > div {
+    display: flex;
+    align-items: center;
+}
 
 .note-card {
     width: 240px;
@@ -87,12 +97,16 @@
     transition: .2s ease;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
+
+
+
+
 .note-card > div{
     display: flex;
     justify-content: space-between;
 }
+
 .note-card > div > i{
     font-size: 17px;
 }
@@ -161,6 +175,7 @@ input.color-input {
     border: 1px solid gray;
     border-radius: 50%;
     cursor: pointer;
+    outline: 0
 }
 .opt-btns {
     display: flex;
@@ -270,10 +285,61 @@ input.color-input {
   }
 
   .todos-section{
-display: flex;
-flex-direction: column
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 10px;
   }
 
-  .todos-section:last-child {
-      display: none
+  .todos-section >*:last-child {
+    display: none;
   } 
+
+  .todo {
+      display: flex;
+  }
+
+
+  .fa-list{
+    font-size: 25px;
+    margin:5px;
+    color: lightblue;
+    cursor: pointer;
+  }
+
+  .fa-arrow-right{
+    font-size: 25px;
+    margin-right: 7px;
+    align-self: end;
+    margin-top: 7px;
+    cursor: pointer;
+  }
+
+
+  .search input {
+    width: 30vw;
+    height: 30px;
+    border-radius: 10px;
+    outline: 0;
+    border: solid 1px black;
+    padding-left: 10px;
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+
+  @media (max-width: 608px){
+    .note-card{
+        width: 90vw;
+    }
+    .new-note{
+        width: 90vw;
+    }
+    .search input{
+        width: 90vw;
+    }
+ }
+ 

@@ -6,7 +6,10 @@ export default {
     template: `   
     <div  class="createMode new-note todos" :style="{ background: newNote.color}">
         <div class="text-note">
-            <input type="text" v-model="newNote.data.headline" ref="headline"   placeholder="Title" :style="{ background: newNote.color}"> 
+            <div>
+                <input type="text" class="todo-title" v-model="newNote.data.headline" ref="headline"   placeholder="New todo-list title" :style="{ background: newNote.color}"> 
+                <i class="fas fa-arrow-right" @click="$emit('displayNote')"></i>
+            </div>
             <section class="todos">
                 <div v-for="(todo,i) in newNote.data.todos">
                     <input type="checkbox" @click.stop='' v-model="newNote.data.todos[i].done">

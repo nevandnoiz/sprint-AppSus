@@ -12,12 +12,12 @@ export default {
                 <h2>{{note.data.headline}}</h2>
                 <i class="fas fa-map-pin" v-if="note.order" @click.stop="removePin(note)"></i>
             </div>
-            <section class="todos-section"> 
-                <div v-for="(todo,i) in note.data.todos">
+            <div class="todos-section"> 
+                <div v-for="(todo,i) in note.data.todos" class="todo">
                     <input type="checkbox" @click="updateCheckbox(note ,i)" v-model="todo.done">
                     <p cols="30" rows="5"  :style="{ background: color}">{{todo.text}}</p>
                 </div>
-            </section>
+            </div>
                 <transition name="fade">
                 <card-btns v-show="showBtns" :note="note" :color="color" @deleteNote="deleteNote(note.id)" @addPin="addPin(note)" @changeColor="changeColor">
                 </card-btns>
