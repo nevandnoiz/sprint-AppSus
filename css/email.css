@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 40px;
+    padding: 0 80px;
 }
 
 .email-nav .nav-routes{
@@ -15,7 +15,7 @@
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
     font-size: 20px;
-    width:195px;
+    width:200px;
 }
 
 .nav-routes > a:hover {
@@ -277,8 +277,13 @@
 }
 
 .mobile-nav button{
+    background:none;
+    border:none;
+    color:white;
+    font-weight: bold;
+    font-size: 24px;
     cursor:pointer;
-    margin-left: 5px;
+    margin-left: 9px;
 }
 
 .email-lists-section{
@@ -300,7 +305,7 @@
 .email-app{
     display:grid;
     grid-template:50px 1fr/210px 1fr;
-    height: 99vh;
+    height: 100vh;
 }
 
 .app-side-bar button{
@@ -397,13 +402,13 @@
     position:fixed;
     bottom: -100px;
     right: 20px;
-    font-size: 26px;
+    font-size: 22px;
     color: white;
     background-color: rgb(109, 162, 227);
     border-radius: 100%;
     border:none;
     box-shadow:0 0 3px blue;
-    padding: 20px;
+    padding: 16px 18px;
     transition: linear 0.3s;
     cursor: pointer;
 }
@@ -448,6 +453,9 @@
     .email-filter input{
         width: 220px;
     }
+    .email-nav{
+        padding: 0 40px;
+    }
     .email-nav .nav-routes{
         width: 170px;
     }
@@ -460,6 +468,7 @@
         grid-area: unset;
         position: absolute;
         height: 90vh;
+        width: 50vw;
         transform: translate(-300px,70px);
         transition: linear 0.6s;
     }
@@ -473,11 +482,12 @@
     .email-app{
         padding: 0;
         grid-template:70px 1fr/1fr;
-        height: 98vh;
+        /* height: 100vh; */
     }
     .mobile-nav{
         display:flex;
-        min-width:200px
+        min-width:200px;
+        position: sticky;
     }
     .mobile-compose{
         display:block;
@@ -490,11 +500,9 @@
     .email-details{
         grid-area: 2/1/2/1;
         padding:0 8px;
-        z-index:1;
         background-color:white;
     }
     .email-details .preview-controls-email{
-        z-index:1;
         background-color:white;
         border-width: 0 0 1px 0;
     }
@@ -525,7 +533,11 @@
 
     .email-compose input {
         padding: 16px 14px;
-        font-size: 20px;
+        font-size: 18px;
+    }
+    .email-compose textarea {
+        padding: 16px 14px;
+        font-size: 18px;
     }
     .email-compose .compose-nav{
        display: none;
