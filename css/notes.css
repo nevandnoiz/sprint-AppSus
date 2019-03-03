@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto:400,700');
 
+.bcg{
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+}
 
 .notes-app {
     display: flex;
@@ -299,7 +308,10 @@ input.color-input {
   } 
 
   .todo {
-      display: flex;
+    display: flex;
+  }
+  .todo p {
+    font-family: 'Roboto', sans-serif;
   }
 
 
@@ -343,3 +355,4 @@ input.color-input {
     }
  }
  
+
