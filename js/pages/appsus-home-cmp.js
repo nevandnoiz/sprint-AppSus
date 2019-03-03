@@ -3,7 +3,7 @@ import homeService from '../services/home-service.js';
 
 export default {
     template: `   
-    <div class="home-page" ref=home>
+    <div class="home-page" ref="home">
         
         <nav-bar></nav-bar>
     <div class="change-background">
@@ -15,21 +15,23 @@ export default {
 `,
     data() {
         return {
-            currBackground: null
+            currBackground: 1
         }
     },
     methods: {
         switchBackground(direction) {
             if (direction === 'right') {
                 this.currBackground++
-                if (this.currBackground === 10) this.currBackground = 1
+                if (this.currBackground === 14) this.currBackground = 1
+                console.log(this.currBackground);
             }
             else if (direction === 'left') {
                 this.currBackground--
-                if (this.currBackground === 0) this.currBackground = 9
+                if (this.currBackground === 0) this.currBackground = 13
             }
             this.setBackground()
             this.saveCurrBackground();
+            
         },
         setBackground() {
             const home = this.$refs.home
