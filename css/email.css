@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 40px;
+    padding: 0 80px;
 }
 
 .email-nav .nav-routes{
@@ -15,7 +15,7 @@
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
     font-size: 20px;
-    width:195px;
+    width:200px;
 }
 
 .nav-routes > a:hover {
@@ -448,6 +448,9 @@
     .email-filter input{
         width: 220px;
     }
+    .email-nav{
+        padding: 0 40px;
+    }
     .email-nav .nav-routes{
         width: 170px;
     }
@@ -460,6 +463,7 @@
         grid-area: unset;
         position: absolute;
         height: 90vh;
+        width: 50vw;
         transform: translate(-300px,70px);
         transition: linear 0.6s;
     }
@@ -490,11 +494,9 @@
     .email-details{
         grid-area: 2/1/2/1;
         padding:0 8px;
-        z-index:1;
         background-color:white;
     }
     .email-details .preview-controls-email{
-        z-index:1;
         background-color:white;
         border-width: 0 0 1px 0;
     }
