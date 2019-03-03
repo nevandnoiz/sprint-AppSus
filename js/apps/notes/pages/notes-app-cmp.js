@@ -40,5 +40,6 @@ export default {
     },
     created() {
         this.notes = getNotes('')
+        eventBus.$emit('test', this.notes)
     },
 }
