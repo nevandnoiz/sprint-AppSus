@@ -62,3 +62,7 @@
 .change-background-btn:active{
     text-shadow: 0 0 2px black
 }
+
+.change-background-btn:focus{
+outline:none;
+}

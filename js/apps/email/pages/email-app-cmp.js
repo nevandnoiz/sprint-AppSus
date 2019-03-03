@@ -1,5 +1,5 @@
 import emailService from '../services/email-service.js';
-import emailFilter from '../cmps/email-filter-cmp.js';
+import emailNav from '../cmps/email-nav-cmp.js';
 import emailStatus from '../cmps/email-status-cmp.js';
 import emailCompose from '../cmps/email-compose-cmp.js';
 import emailSidebar from '../cmps/email-sidebar-cmp.js';
@@ -7,33 +7,23 @@ import { eventBus } from '../../../main.js';
 
 export default {
     components: {
-        emailFilter,
+        emailNav,
         emailStatus,
         emailSidebar,
         emailCompose
     },
     template: `   
-    <div class="email-app" v-if="inboxEmails">
-        <div class="email-nav">
-            <div class="nav-routes">
-            <router-link exact to="/">HOME</router-link>
-            <router-link exact to="/notes">NOTES</router-link>
+        <div class="email-app" v-if="inboxEmails">
+        <email-nav @filtered="setFilter"></email-nav>
+            <div class="app-side-bar" :class="{'open-side-bar': openSidebar}">
+                <button @click="isComposing=!isComposing"><i class="fas fa-plus"></i> Compose</button>
+                <email-sidebar :totalEmails="numOfEmails" @changeList="changeList" 
+            :unreadEmails="unreadEmails"></email-sidebar>
+                <email-status :totalEmails="numOfEmails" :unreadEmails="unreadEmails"></email-status>
             </div>
-            <email-filter @filtered="setFilter"></email-filter>
+                <email-compose v-if="isComposing" @sent="addEmail" @closeCompose="closeCompose"></email-compose>
+            <router-view @emailRead="setEmailRead" @delete="deleteEmail" @toggleRead="toggleIsRead" @mobileCompose="isComposing=!isComposing" :emails="emailsToShow" :currList="emailsList"></router-view>
         </div>
-        <div class="mobile-nav">
-            <email-filter @filtered="setFilter"></email-filter>
-            <button @click="openSidebar=!openSidebar">&#9776;</button>
-        </div>
-        <div class="app-side-bar" :class="{'open-side-bar': openSidebar}">
-            <button @click="isComposing=!isComposing"><i class="fas fa-plus"></i> Compose</button>
-            <email-sidebar :totalEmails="numOfEmails" @changeList="changeList" 
-           :unreadEmails="unreadEmails"></email-sidebar>
-            <email-status :totalEmails="numOfEmails" :unreadEmails="unreadEmails"></email-status>
-        </div>
-            <email-compose v-if="isComposing" @sent="addEmail" @closeCompose="closeCompose"></email-compose>
-        <router-view @emailRead="setEmailRead" @delete="deleteEmail" @toggleRead="toggleIsRead" @mobileCompose="isComposing=!isComposing" :emails="emailsToShow" :currList="emailsList"></router-view>
-    </div>
 `,
     data() {
         return {
@@ -49,7 +39,7 @@ export default {
     methods: {
         changeList() {
             this.findCurrentListByRoute();
-            if (this.openSidebar) this.openSidebar=false;
+            if (this.openSidebar) this.openSidebar = false;
         },
         findCurrentListByRoute() {
             if (this.$router.currentRoute.path.includes('inbox')) return this.emailsList = 'inbox'
@@ -86,9 +76,8 @@ export default {
             })
             return count;
         },
-        test(notes){
-            console.log('dsfsdf')
-            // console.log(notes)
+        toggleSidebar() {
+            this.openSidebar = !this.openSidebar
         }
     },
     computed: {
@@ -130,6 +119,7 @@ export default {
             selectedFilter: 'All'
         },
             eventBus.$on('reply', this.replyEmail)
+        eventBus.$on('toggleSidebar', this.toggleSidebar)
     },
     mounted() {
         this.findCurrentListByRoute()
