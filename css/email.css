@@ -278,13 +278,21 @@
 }
 
 .app-side-bar{
-    background-color:whitesmoke;
+    background-color:rgb(245, 245, 245);
     border:1px solid black;
     display: flex;
     flex-direction:column;
     grid-area: 2/1/2/1;
-    align-items: center;
-    padding: 20px 0;
+    /* align-items: center; */
+    padding: 20px 18px;
+}
+
+.app-side-bar .side-bar-link i{
+   margin-right: 50px;
+}
+
+.app-side-bar .side-bar-link a span{
+   margin-left: 100px;
 }
 
 .email-nav .mobile-nav{
@@ -314,7 +322,8 @@
     padding: 20px 0;
     flex-direction:column;
     justify-content: space-evenly;
-    font-size: 22px;
+    font-size: 26px;
+    height:170px;
 }
 
 .email-lists-section a:hover{
@@ -490,17 +499,18 @@
     }
     .app-side-bar{
         grid-area: unset;
+        padding: 0 18px;
         position: absolute;
-        height: 90vh;
-        width: 50vw;
-        transform: translate(-300px,70px);
+        height: 91vh;
+        width: 85vw;
+        transform: translate(-350px,70px);
         transition: linear 0.6s;
     }
     .app-side-bar button{
       display:none;
     }
     .open-side-bar{
-        transition:linear 0.4s;
+        transition:linear 0.5s;
         transform: translate(0,70px);
     }
     .email-app{
@@ -549,6 +559,7 @@
        display:none;
     }
     .email-filter .filter-controls.mobile{
+        padding: 0 1px 0 0 ;
         animation: filterAnim 0.5s;
         border-radius: 10px;
         position: absolute;
@@ -565,7 +576,8 @@
     }
     .email-filter .filter-controls.mobile select{
         border-radius: 10px;
-        width:16px;
+        width:18px;
+        border:none;
     }
     .email-compose {
         width: 100vw;
