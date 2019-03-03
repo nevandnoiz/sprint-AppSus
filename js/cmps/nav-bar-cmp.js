@@ -9,7 +9,7 @@ export default {
                 <router-link exact to="/notes">NOTES</router-link>
             </ul>
             <ul>
-                <router-link exact to="/email">MAIL</router-link>
+                <router-link exact to="/email">EMAIL</router-link>
             </ul>
         </div>
 

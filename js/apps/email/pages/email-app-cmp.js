@@ -70,8 +70,11 @@ export default {
             setTimeout(() => { eventBus.$emit('composeReply', email) }, 0)
         },
         noteToMessage(note) {
-            this.isComposing = true;
-            setTimeout(() => { eventBus.$emit('composeNote', note) }, 0)
+            console.log(note)
+            setTimeout(() => { 
+                this.isComposing = true;
+                eventBus.$emit('composeNote', note)
+        console.log(this.isComposing) }, 900)
         },
         countUnreadEmails() {
             var count = 0;

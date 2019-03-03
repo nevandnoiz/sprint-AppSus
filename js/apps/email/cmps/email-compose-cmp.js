@@ -56,7 +56,7 @@ export default {
         sendNote(note) {
             if (note.text.headLine) this.emailData.subject = note.text.headLine
             else this.emailData.subject = note.text.headLine
-            this.this.emailData.body = note.text.body
+            this.emailData.body = note.text.body
         },
         // editReplyBody() {
         //     this.isEditReplyBody = true
