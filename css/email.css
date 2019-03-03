@@ -13,9 +13,10 @@
     height: 50px;
 }
 
-.desktop-nav .nav-routes{
+.nav-routes{
     display:flex;
     justify-content: space-between;
+    align-items: center;
     color: rgb(255, 255, 255);
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
@@ -511,6 +512,9 @@
         min-width:200px;
         position: sticky;
     }
+    .mobile-nav .nav-routes{
+        width: 170px;
+    }
     .mobile-compose{
         display:block;
         bottom: 20px;
@@ -546,6 +550,9 @@
     .email-filter .filter-controls.mobile{
         animation: filterAnim 0.5s;
         border-radius: 10px;
+        position: absolute;
+        align-self: center;
+        height:50px;
     }
     @keyframes filterAnim {
         from {opacity:0;}

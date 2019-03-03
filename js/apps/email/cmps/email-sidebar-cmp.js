@@ -14,6 +14,7 @@ export default {
         <router-link @click.native="$emit('changeList','deleted')" :to="'/email/deleted'">
         <i class="fas fa-trash-alt"></i> Deleted
         </router-link>
+        
     </div>
     `,
     data() {

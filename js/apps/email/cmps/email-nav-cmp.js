@@ -17,7 +17,11 @@ export default {
         </div>
         <div class="mobile-nav">
             <email-filter @filtered="emitFilter"></email-filter>
-            <button @click="emitToggleSidebar">&#9776;</button>
+            <div class="nav-routes">
+            <router-link exact to="/">HOME</router-link>
+            <router-link exact to="/notes">NOTES</router-link>
+            </div>
+            <button @click="emitToggleSidebar"><i class="fas fa-bars"></i></button>
         </div>
     </div>
     `,
