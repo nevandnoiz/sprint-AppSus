@@ -2,7 +2,7 @@
 
 
 .home-page {
-    background-image: url("/img/birds-cold-conifer-917494.jpg");
+    background-image: url("/img/1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 0 5%;
@@ -10,7 +10,7 @@
 }
    
 .nav-bar{
-    height: 44px;
+    height: 50px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -28,6 +28,13 @@
     font-size: 20px
 }
 
+.nav-bar > ul > a {
+    transition: .2s ease;
+}
 .nav-bar > ul > a:hover {
-    color: black;
+    color: gray;
+}
+
+.change-background{
+    margin: 100px
 }

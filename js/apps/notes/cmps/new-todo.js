@@ -8,9 +8,10 @@ export default {
         <div class="text-note">
             <input type="text" v-model="newNote.data.headline" ref="headline"  @blur="noteBlur" placeholder="Title" :style="{ background: newNote.color}"> 
             <section class="todos">
-                <div v-for="n in numOfTodos">
+                <div v-for="(n,i) in numOfTodos">
                     <input type="checkbox" @click.stop=''>
-                    <input cols="30" rows="5"  v-model="newNote.data.todos[n].text" @focus="noteFocused" @keyup.once="addLine" @blur="noteBlur"  ref="body" placeholder="Start typing a task" :style="{ background: newNote.color} "></input>
+                    saw {{n}}
+                    <input cols="30" rows="5"  v-model="newNote.data.todos[i].text" @focus="noteFocused" @keyup.once="addLine" @blur="noteBlur"  ref="body" placeholder="Start typing a task" :style="{ background: newNote.color}">{{n}}</input>
                 </div>
             </section>
             <op-btns @addNote="addNote" :newNote="newNote" @colorFocus="btnsFocus" @colorblur="btnBlur" @pinNote="pinNote"></op-btns>

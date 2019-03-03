@@ -5,7 +5,7 @@ export default {
     name: 'textComp',
     props: ['note'],
     template: `
-    <div :style="{order: noteOrder}">
+    <div :style="{order: noteOrder, display: displayCard}">
         <div class="note-card" :style="{ background: note.color}" @mouseenter="toggleBtns" @mouseleave="toggleBtns">
             <div  @click="displayModal = true">
                 <h2>{{note.text.headline}}</h2>
@@ -27,7 +27,7 @@ export default {
         return {
             color: '#ffffff',
             showBtns: false,
-            display: 'flex',
+            displayCard: 'flex',
             displayModal: false,
         }
     },
@@ -42,7 +42,7 @@ export default {
         },
         deleteNote(noteid) {
             deleteNote(noteid)
-            this.display = 'none';
+            this.displayCard = 'none';
         },
         removePin(note) {
             this.showBtns = false;
