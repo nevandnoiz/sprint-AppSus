@@ -15,8 +15,9 @@
 
 <body>
     <div id="app">
-        
+        <transition name="component-fade" mode="out-in">
         <router-view></router-view>
+        </transition>
     </div>
     <script src="lib/vue.js"></script>
     <script src="lib/vue-router.js"></script>
