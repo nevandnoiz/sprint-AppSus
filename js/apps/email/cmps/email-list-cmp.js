@@ -10,7 +10,7 @@ export default {
                 <span>No {{currList}} messages</span>    
         </div>
         <div v-else class="email-list">
-            <email-preview v-for="email in emails" @delete="emitDelete" @toggleRead="emitToggleRead" :email="email"
+            <email-preview v-for="email in emails" :key="email.id" @delete="emitDelete" @toggleRead="emitToggleRead" :email="email"
            :currList="currList" @click.native="goToDetails(email,email.id)"></email-preview>
            <button @click="$emit('mobileCompose')" class="mobile-compose"><i class="fas fa-pencil-alt"></i></button>
         </div>
