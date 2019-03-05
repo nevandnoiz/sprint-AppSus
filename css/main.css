@@ -15,10 +15,3 @@ a {
 textarea{
     resize:none;
 }
-
-.component-fade-enter-active, .component-fade-leave-active {
-    transition: opacity .1.3s ease;
-  }
-  .component-fade-enter, .component-fade-leave-to {
-    opacity: 0;
-  }
